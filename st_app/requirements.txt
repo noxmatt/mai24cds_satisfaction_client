@@ -1,0 +1,24 @@
+pandas
+matplotlib.pyplot
+seaborn
+streamlit
+io
+re
+requests
+bs4 (BeautifulSoup)
+time
+sklearn.model_selection
+sklearn.naive_bayes
+sklearn.linear_model
+sklearn.neighbors
+sklearn.feature_extraction.text
+sklearn.pipeline
+sklearn.preprocessing
+sklearn.metrics
+imblearn.pipeline
+imblearn
+joblib
+nltk
+numpy
+bertopic
+transformers
