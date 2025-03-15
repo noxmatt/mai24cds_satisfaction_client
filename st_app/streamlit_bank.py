@@ -128,7 +128,7 @@ elif page == pages[1]:
     st.markdown("""
         ### Affichage des données brutes du Webscrapping""")
 
-    df = pd.read_csv(r"\st_app\df_bank.csv")
+    df = pd.read_csv("/st_app/df_bank.csv")
     st.dataframe(df.head())
 
     st.write("""Le web scraping doit être réalisé dans le respect des lois en vigueur
