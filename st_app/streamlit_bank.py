@@ -61,7 +61,7 @@ elif page == pages[1]:
 
     Grâce à cette approche, nous avons pu structurer les données efficacement, posant ainsi les bases solides de notre analyse.
     """)
-    st.image("C:/Users/matth/onedrive/formation//mai24cds_satisfaction_client/st_app/data_scraping.gif")
+    st.image("st_app/data_scraping.gif")
 
     if st.checkbox(
         "Affichage du code : le Webscraping avec BeautifulSoup"
@@ -128,7 +128,7 @@ elif page == pages[1]:
     st.markdown("""
         ### Affichage des données brutes du Webscrapping""")
 
-    df = pd.read_csv(r"C:\Users\matth\onedrive\formation\mai24cds_satisfaction_client\st_app\df_bank.csv")
+    df = pd.read_csv(r"\st_app\df_bank.csv")
     st.dataframe(df.head())
 
     st.write("""Le web scraping doit être réalisé dans le respect des lois en vigueur
