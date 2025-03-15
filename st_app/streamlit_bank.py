@@ -1086,15 +1086,19 @@ elif page == pages[5]:
     )
     filtered_df = filtered_df.sample(n=data_size, random_state=42)
 
-    # Ajouter une option pour choisir le type de n-grammes
-    st.write("### Paramètres des n-grammes")
-    ngram_min = st.number_input(
-        "Taille minimale des n-grammes", min_value=1, max_value=5, value=2, step=1
+    # Ajouter des scénarios fixes pour les n-grammes
+    st.write("### Scénarios des n-grammes")
+    ngram_scenarios = {
+        "Vision normale (1,1)": (1, 1),
+        "Bi-gram (2,2)": (2, 2),
+        "Tri-gram (3,3)": (3, 3),
+    }
+    selected_scenario = st.radio(
+        "Choisissez un scénario n-gram :", options=list(ngram_scenarios.keys())
     )
-    ngram_max = st.number_input(
-        "Taille maximale des n-grammes", min_value=1, max_value=5, value=2, step=1
-    )
-    ngram_range = (ngram_min, ngram_max)
+    ngram_range = ngram_scenarios[selected_scenario]
+
+    st.write(f"Vous avez choisi le scénario : {selected_scenario} avec n-gram = {ngram_range}")
 
     # Ajouter des entrées pour paramétrer le nombre de mots et de sujets
     st.write("### Paramètres des sujets et des mots-clés")
@@ -1136,7 +1140,7 @@ elif page == pages[5]:
         ]
         return topics, topic_distributions
 
-    # creation des colonnes pour affichage des avis positif et negatifs
+    # Création des colonnes pour affichage des avis positifs et négatifs
     col1, col2 = st.columns(2)
     with col1:
         st.header("### Sujets pour les avis positifs")
@@ -1161,6 +1165,7 @@ elif page == pages[5]:
             ngram_range=ngram_range,
         )
         st.write(negative_topics)
+
 
 ##############################################################################
 # PAGE 6
