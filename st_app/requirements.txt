@@ -5,7 +5,7 @@ streamlit
 io
 re
 requests
-bs4 (BeautifulSoup)
+bs4
 time
 sklearn.model_selection
 sklearn.naive_bayes
