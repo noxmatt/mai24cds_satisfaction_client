@@ -29,7 +29,7 @@ page = st.sidebar.radio("Aller à la page:", pages)
 
 if page == pages[0]:
     
-    st.image("C:/Users/matth/onedrive/formation/mai24cds_satisfaction_client/st_app/satisfaction.jpg", width=500)
+    st.image("satisfaction.jpg", width=500)
     st.title("Analyse et Prédiction de la Satisfaction Client")
 
     st.markdown("""
