@@ -143,10 +143,10 @@ elif page == pages[1]:
 
 elif page == pages[2]:
     st.title("Exploration & Pré-traitement des données")
-    df = pd.read_csv(r"C:\Users\matth\onedrive\formation\mai24cds_satisfaction_client\st_app\df_bank.csv")
+    df = pd.read_csv("st_app/df_bank.csv")
 
         # Centrer l'image
-    st.image("C:/Users/matth/OneDrive/Formation/mai24cds_satisfaction_client/st_app/nettoyage-des-donnees.png", width=300, caption="")
+    st.image("st_app/nettoyage-des-donnees.png", width=300, caption="")
         
     if st.checkbox("Afficher le DataFrame brut du scrapping"):
         st.dataframe(df.head(), width=1500)
@@ -302,7 +302,7 @@ elif page == pages[2]:
     if resultat is not None:
         st.write(resultat)
 
-    df_global = pd.read_csv(r"C:\Users\matth\onedrive\formation\mai24cds_satisfaction_client\st_app\df_global.csv")
+    df_global = pd.read_csv("st_app/df_global.csv")
     if st.checkbox(
         "Afficher le DataFrame qui vient d'être nettoyé, corrigé, et enrichi de nouvelles colonnes"
     ):
@@ -315,7 +315,7 @@ elif page == pages[3]:
     st.write("### Analyse des données")
     st.write("Introduction: ci dessous le dataframe brut apres webscraping")
 
-    df_global = pd.read_csv(r"C:\Users\matth\onedrive\formation\mai24cds_satisfaction_client\st_app\df_global.csv")
+    df_global = pd.read_csv("st_app/df_global.csv")
     st.dataframe(df_global.head())
 
     st.subheader("Nombre d'avis par année")
@@ -366,7 +366,7 @@ elif page == pages[3]:
 
     st.write("### Analyse des notes en pourcentage")
     st.image(
-        "C:/Users/matth/OneDrive/Formation/mai24cds_satisfaction_client/st_app/percent_cum_rates.png", width=1500
+        "st_app/percent_cum_rates.png", width=1500
     )
     st.write(
         r"""Commentaire : Ce graphique montre que le pourcentage de notation des entreprises varie en fonction du nombre total d'avis déposés.
@@ -377,7 +377,7 @@ elif page == pages[3]:
     )
 
     st.write("### Longueur des avis")
-    st.image("C:/Users/matth/OneDrive/Formation/mai24cds_satisfaction_client/st_app/len_words.png", width=1500)
+    st.image("st_app/len_words.png", width=1500)
     st.write(
         r"""Commentaire : Nous constatons que la longueur des commentaires des clients satisfaits avec un score de 5 est très courte par rapport à ceux des clients insatisfaits.
              Cela confirme la corrélation négative observée sur la heatmap, et nous pouvons envisager d'utiliser cette variable pour améliorer notre modèle si nécessaire. """
@@ -387,11 +387,11 @@ elif page == pages[3]:
     col3, col4 = st.columns(2)
     with col3:
         st.image(
-            "C:/Users/matth/OneDrive/Formation/mai24cds_satisfaction_client/st_app/wordcloud_pos.png", width=1500
+            "st_app/wordcloud_pos.png", width=1500
         )
     with col4:
         st.image(
-            "C:/Users/matth/OneDrive/Formation/mai24cds_satisfaction_client/st_app/wordcloud_neg.png", width=1500
+            "st_app/wordcloud_neg.png", width=1500
         )
     st.write(
         r"""Commentaire : Pour les commentaires positifs, nous pouvons identifier quelques thèmes liés à un service clientèle rapide et de qualité, à une bonne expérience et même à des recommandations.
@@ -436,7 +436,7 @@ de variables indépendantes."""
         st.markdown(texte)
 
         df_global = pd.read_csv(
-            r"C:\Users\matth\onedrive\formation\mai24cds_satisfaction_client\st_app\df_global.csv"
+            "st_app/df_global.csv"
         )
         data_size = st.slider(
             "Sélectionnez la taille du jeu de données",
@@ -527,7 +527,7 @@ de variables indépendantes."""
         )
 
         df_global = pd.read_csv(
-            r"C:\Users\matth\onedrive\formation\mai24cds_satisfaction_client\st_app\df_global.csv"
+            "st_app/df_global.csv"
         )
         df_global = df_global[
             df_global.rating != 3
@@ -659,15 +659,15 @@ de variables indépendantes."""
 
         # Créer visuel en fonction de la méthode sélectionnée
         if resampling_method == "FunctionSampler":
-            st.image("C:/Users/matth/onedrive/formation/mai24cds_satisfaction_client/st_app/fs_model1.png")
+            st.image("st_app/fs_model1.png")
         elif resampling_method == "RandomOverSampler":
-            st.image("C:/Users/matth/onedrive/formation/mai24cds_satisfaction_client/st_app/ros_model1.png")
+            st.image("st_app/ros_model1.png")
         elif resampling_method == "ADASYN":
-            st.image("C:/Users/matth/onedrive/formation/mai24cds_satisfaction_client/st_app/adasyn_model1.png")
+            st.image("st_app/adasyn_model1.png")
         elif resampling_method == "SMOTE":
-            st.image("C:/Users/matth/onedrive/formation/mai24cds_satisfaction_client/st_app/smote_model1.png")
+            st.image("st_app/smote_model1.png")
         elif resampling_method == "RandomUnderSampler":
-            st.image("C:/Users/matth/onedrive/formation/mai24cds_satisfaction_client/st_app/rus_model1.png")
+            st.image("st_app/rus_model1.png")
         st.write("Nous remarquons que les méthodes RandomOverSampler et FunctionSampler sont les plus éfficaces pour rééquilibrer les données.")
         st.write("Testons àprésent ces deux méthodes pour voir laquelle est la plus perform avec un autre scaler")
                  
@@ -688,7 +688,7 @@ de variables indépendantes."""
 
         # Charger les données
         df_global = pd.read_csv(
-            r"C:\Users\matth\onedrive\formation\mai24cds_satisfaction_client\st_app\df_global.csv"
+            "st_app/df_global.csv"
         )
         df_global = df_global[df_global.rating != 3]
         df_global["rating_2"] = df_global.rating.replace(
@@ -767,7 +767,7 @@ de variables indépendantes."""
     from imblearn.over_sampling import RandomOverSampler
     from imblearn import FunctionSampler
 
-    df = pd.read_csv("C:/Users/matth/onedrive/formation/mai24cds_satisfaction_client/st_app/df_global.csv")
+    df = pd.read_csv("st_app/df_global.csv")
     df = df[df.rating != 3]
     df['rating_2'] = df.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
 
@@ -829,7 +829,7 @@ de variables indépendantes."""
         """
             st.code(code_hyper, language="python")
 
-        st.image("C:/Users/matth/onedrive/formation/mai24cds_satisfaction_client/st_app/hyper_param.png")
+        st.image("st_app/hyper_param.png")
 
         st.write(
             "A présent pour verifier notre modele pré entrainé avec les hyperparametres,"
@@ -847,7 +847,7 @@ de variables indépendantes."""
 
         # Chargement du modèle pré-entraîné (incluant la vectorisation)
         model_lr = joblib.load(
-            r"C:\Users\matth\OneDrive\Formation\mai24cds_satisfaction_client\st_app\model_lr_pipe"
+            "st_app/model_lr_pipe"
         )
 
         # Titre de l'application
@@ -907,7 +907,7 @@ de variables indépendantes."""
 from sklearn.decomposition import LatentDirichletAllocation
 from sklearn.feature_extraction.text import CountVectorizer
 
-df_clean = pd.read_csv(r"C:\Users\matth\onedrive\formation\mai24cds_satisfaction_client\st_app\df_clean.csv")
+df_clean = pd.read_csv("st_app/df_clean.csv")
 df_clean = df_clean[df_clean.rating != 3]
 df_clean['rating_2'] = df_clean.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
 df_clean['avis_clean'] = df_clean['avis_clean'].fillna('').astype(str)
@@ -940,7 +940,7 @@ st.write(df['topic'].value_counts())
 """
                 st.code(code_lda, language="python")
 
-            st.image("C:/Users/matth/onedrive/formation/mai24cds_satisfaction_client/st_app/LDA10thm.png")
+            st.image("st_app/LDA10thm.png")
 
         if st.checkbox("Méthode Bertopics", key="bertopics1"):
             import pandas as pd
@@ -955,7 +955,7 @@ st.write(df['topic'].value_counts())
                     # Charger le jeu de données principal
                     st.write("Analyse avec BERTopic")
                     df_clean = pd.read_csv(
-                        r"C:\Users\matth\onedrive\formation\mai24cds_satisfaction_client\st_app\df_clean.csv"
+                        "st_app/df_clean.csv"
                     )
                     df_clean = df_clean[df_clean.rating != 3]
                     df_clean["rating_2"] = df_clean.rating.replace(
@@ -1050,12 +1050,12 @@ elif page == pages[5]:
         stop_words_default = []
 
     # Charger et préparer les données
-    df_clean = pd.read_csv(r"C:\Users\matth\onedrive\formation\mai24cds_satisfaction_client\st_app\df_clean.csv")
+    df_clean = pd.read_csv("st_app/df_clean.csv")
     df_clean = df_clean[df_clean.rating != 3]
     df_clean["rating_2"] = df_clean.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
     df_clean["avis"] = df_clean["avis_clean"].fillna("").astype(str)
 
-    df_global = pd.read_csv(r"C:\Users\matth\onedrive\formation\mai24cds_satisfaction_client\st_app\df_global.csv")
+    df_global = pd.read_csv("st_app/df_global.csv")
     df_global = df_global[df_global.rating != 3]
     df_global["rating_2"] = df_global.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
     df_global["avis"] = df_global["avis_global"].fillna("").astype(str)
