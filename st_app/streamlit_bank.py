@@ -39,7 +39,7 @@ if page == pages[0]:
 
     Ce projet reflète notre engagement à explorer des problématiques concrètes et actuelles à travers le prisme de la data science. En vous plongeant dans cette aventure, vous découvrirez comment les données deviennent une source d’insights stratégiques, ouvrant la voie à des solutions impactantes pour le monde d’aujourd’hui et de demain.
     """)
-    st.write(r"""Groupe : Mathieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui
+    st.write(r"""Groupe : Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui
                 Promation : Mai 24 CDS
                 Tuteur : Sébastien Sime
                 Date de Soutenance : 18 Mars 2025
@@ -980,9 +980,9 @@ st.write(df['topic'].value_counts())
                     sample_size = st.number_input(
                         "Définissez la taille de l'échantillon",
                         min_value=10000,
-                        max_value=len(df_clean),
-                        value=50000,
-                        step=10000,
+                        max_value=max(len(df_clean)),
+                        value=10000,
+                        step=5000,
                     )
 
                     # Générer un échantillon aléatoire
