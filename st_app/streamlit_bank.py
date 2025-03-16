@@ -910,11 +910,13 @@ de variables indépendantes."""
         if st.checkbox("Méthode LDA", key="lda2"):
             # le topic modeling pour connaitre les themes les plus importants
             st.subheader("""LDA (Latent Dirichlet Allocation) :""")
+            st.image("st_app/shema_lda.png")
             st.write("""--LDA un modèle probabiliste qui détecte des thèmes latents en analysant les fréquences de mots dans les documents,
             sans tenir compte du contexte sémantique profond.--            
             L'allocation de Dirichlet latente (LDA) est un modèle génératif probabiliste utilisé pour découvrir des sujets abstraits dans
             une collection de documents. Elle suppose que chaque document est un mélange de plusieurs sujets et que chaque sujet est un
-            mélange de mots. LDA est une technique de modélisation de sujets qui applique l'apprentissage non supervisé sur de grands ensembles
+            mélange de mots.
+                LDA est une technique de modélisation de sujets qui applique l'apprentissage non supervisé sur de grands ensembles
             de données textuelles pour produire un ensemble résumé de termes représentant les principaux sujets de la collection.
             Elle est largement utilisée en traitement du langage naturel (NLP) pour analyser les tendances et les thèmes dans les textes
          """)
