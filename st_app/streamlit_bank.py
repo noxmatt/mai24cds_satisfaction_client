@@ -659,15 +659,15 @@ de variables indépendantes."""
 
         # Créer visuel en fonction de la méthode sélectionnée
         if resampling_method == "FunctionSampler":
-            st.image("st_app/fs_model1.png")
+            st.image("fs_model1.png")
         elif resampling_method == "RandomOverSampler":
-            st.image("st_app/ros_model1.png")
+            st.image("ros_model1.png")
         elif resampling_method == "ADASYN":
-            st.image("st_app/adasyn_model1.png")
+            st.image("adasyn_model1.png")
         elif resampling_method == "SMOTE":
-            st.image("st_app/smote_model1.png")
+            st.image("smote_model1.png")
         elif resampling_method == "RandomUnderSampler":
-            st.image("st_app/rus_model1.png")
+            st.image("rus_model1.png")
         st.write("Nous remarquons que les méthodes RandomOverSampler et FunctionSampler sont les plus éfficaces pour rééquilibrer les données.")
         st.write("Testons àprésent ces deux méthodes pour voir laquelle est la plus perform avec un autre scaler")
                  
