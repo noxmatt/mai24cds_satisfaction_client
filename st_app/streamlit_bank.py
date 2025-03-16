@@ -1121,12 +1121,12 @@ elif page == pages[5]:
     # Ajouter des entrées pour paramétrer le nombre de mots et de sujets
     st.write("### Paramètres des sujets et des mots-clés")
     n_topics = st.number_input(
-        "Nombre de sujets", min_value=1, max_value=20, value=5, step=1, key="num_topics"
+        "Nombre de sujets", min_value=1, max_value=5, value=3, step=1, key="num_topics"
     )
     n_top_words = st.number_input(
         "Nombre de mots-clés par sujet",
         min_value=1,
-        max_value=20,
+        max_value=8,
         value=5,
         step=1,
         key="num_top_words",
