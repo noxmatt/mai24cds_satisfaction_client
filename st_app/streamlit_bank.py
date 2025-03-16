@@ -427,7 +427,7 @@ graphique : deux nuages de mots (positif + négatif) """
 elif page == pages[4]:
     st.title("Modélisations & Prédictions")
 
-    if st.checkbox("Première modélisation -Modélisation avec vectorisation des mots"):
+    if st.checkbox("#Première modélisation -Modélisation avec vectorisation des mots"):
         texte = """Nous avons lancé une première modélisation sans prétraitement des mots afin 
         d’obtenir une base de comparaison. En respectant les recommandations de scikit-learn et en
         considérant plusieurs critères (taille, type, prédiction attendue, structure et format des données),
@@ -532,7 +532,7 @@ de variables indépendantes."""
 
     # Binarisation des notes
     # on sépare les notes en 2 catégories (-1,1,)
-    if st.checkbox("Deuxième modélisation - binarization des notes"):
+    if st.checkbox("#Deuxième modélisation - binarization des notes"):
         st.write(
             "### Modélisation avec vectorisation des mots et Binarisation des notes"
         )
@@ -635,7 +635,7 @@ de variables indépendantes."""
             "Nous voyons que les resultats ne sont pas encore satisfaisants, nous allons donc essayer de les améliorer en utilisant la vectorisation des mots et la binarisation des notes"
         )
 
-    if st.checkbox("Rééquilibrage des données"):
+    if st.checkbox("#Rééquilibrage des données"):
         st.write(
             """Pour équilibrer un dataset, nous utilisons deux approches complémentaires : le suréchantillonnage et le sous-échantillonnage.
 
@@ -682,7 +682,7 @@ de variables indépendantes."""
         st.write("Nous remarquons que les méthodes RandomOverSampler et FunctionSampler sont les plus éfficaces pour rééquilibrer les données.")
         st.write("Testons àprésent ces deux méthodes pour voir laquelle est la plus perform avec un autre scaler")
                  
-    if st.checkbox("Optimisation du scaler"):
+    if st.checkbox("#Optimisation du scaler"):
         st.write(
             """L'optimisation du scaler fait partie des étapes importantes des modèles d'apprentissage automatique."""
         )
@@ -757,7 +757,7 @@ de variables indépendantes."""
             " les deux méthodes sont donc complémentaires."
         )
 
-    if st.checkbox("Optimisation des hyperparamètres"):
+    if st.checkbox("#Optimisation des hyperparamètres"):
         st.header(
             """L'optimisation des hyperparamètres."""
         )
@@ -898,7 +898,7 @@ de variables indépendantes."""
             """La partie modélisation nous à permi de calculer notre meilleur prédiction, nous devons maintenant nous concentrer sur la détection des thématiques, pour cela nous avons besoin de retravailler le contenu des avis"""
         )
 
-    if st.checkbox("reconnaissance des thématiques avec LDA et Bertopics", key="lda1"):
+    if st.checkbox("#Reconnaissance des thématiques avec LDA et Bertopics", key="lda1"):
         st.write(
             """Nous allons comparer ces deux methodes, LDA (Latent Dirichlet Allocation) et Bertopics."""
         )
@@ -1018,7 +1018,7 @@ st.write(df['topic'].value_counts())
 
                     display(topic_model.get_topic(0))  # Afficher les termes pour le sujet 0""")
 
-    if st.checkbox("Cas pratique", key="cas_pratique"):
+    if st.checkbox("#Cas pratique", key="cas_pratique"):
                         st.write("Cas pratique")
                         from sklearn.feature_extraction.text import CountVectorizer
                         from sklearn.decomposition import LatentDirichletAllocation
