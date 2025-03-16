@@ -1057,24 +1057,25 @@ st.write(df['topic'].value_counts())
                     df["avis_clean"] = df["avis_clean"].fillna("").astype(str)
                     return df
 
-                # Mise en cache pour les embeddings
-                @st.cache_data
-                def generate_embeddings(avis, embedder):
-                    embeddings = embedder(avis, truncation=True, padding=True, max_length=512)
-                    return np.array([embedding[0][0] for embedding in embeddings])
-
-                # Mise en cache pour le pipeline d'encodage
+                # Mise en cache pour le pipeline Camembert
                 @st.cache_resource
                 def create_embedder():
                     return pipeline("feature-extraction", model="camembert-base", tokenizer="camembert-base")
 
-                # Chargement des données
+                # Mise en cache pour générer les embeddings
+                @st.cache_data
+                def generate_embeddings(avis_tuple, embedder):
+                    avis = list(avis_tuple)  # Reconversion en liste
+                    embeddings = embedder(avis, truncation=True, padding=True, max_length=512)
+                    return np.array([embedding[0][0] for embedding in embeddings])
+
+                # Chargement des données nettoyées
                 df_clean = load_and_clean_data("st_app/df_clean.csv")
 
-                # Filtrage des entreprises via une liste déroulante
+                # Liste déroulante pour sélectionner une entreprise
                 selected_company = st.selectbox(
                     "Choisissez une entreprise",
-                    options=df_clean["company"].unique(),  # Remplacez 'company' par la colonne qui identifie les entreprises
+                    options=df_clean["company"].unique()  # Remplacez 'company' par le nom de la colonne appropriée
                 )
 
                 # Filtrer les données pour l'entreprise sélectionnée
@@ -1082,11 +1083,12 @@ st.write(df['topic'].value_counts())
                 st.write(f"Nombre d'avis pour {selected_company} : {len(df_filtered)}")
 
                 if len(df_filtered) > 0:
-                    # Génération des embeddings pour l'entreprise sélectionnée
+                    # Génération des embeddings pour les avis de l'entreprise sélectionnée
                     st.write("### Génération des embeddings")
                     with st.spinner(f"Encodage des avis pour {selected_company}..."):
                         embedder = create_embedder()
-                        embeddings = generate_embeddings(df_filtered["avis_clean"].tolist(), embedder)
+                        avis_tuple = tuple(df_filtered["avis_clean"].tolist())  # Conversion en tuple
+                        embeddings = generate_embeddings(avis_tuple, embedder)
 
                     # Extraction des sujets avec BERTopic
                     topic_model = BERTopic(language="french")
@@ -1110,6 +1112,7 @@ st.write(df['topic'].value_counts())
                     st.write(topic_model.get_topic(selected_topic))
                 else:
                     st.write("Aucun avis disponible pour l'entreprise sélectionnée.")
+
 
 
 ##############################################################################
