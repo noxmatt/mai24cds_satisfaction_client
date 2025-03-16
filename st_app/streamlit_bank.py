@@ -989,7 +989,7 @@ st.write(df['topic'].value_counts())
                     sample_size = st.number_input(
                         "Définissez la taille de l'échantillon",
                         min_value=10000,
-                        max_value=max(len(df_clean)),
+                        max_value=len(df_clean),
                         value=50000,
                         step=5000,
                     )
