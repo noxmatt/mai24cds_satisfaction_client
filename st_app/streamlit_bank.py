@@ -847,7 +847,7 @@ de variables indépendantes."""
 
         # Chargement du modèle pré-entraîné (incluant la vectorisation)
         model_lr = joblib.load(
-            "st_app/model_lr_pipe"
+            "st_app/model_lr"
         )
 
         # Titre de l'application
