@@ -39,8 +39,7 @@ if page == pages[0]:
 
     Ce projet reflète notre engagement à explorer des problématiques concrètes et actuelles à travers le prisme de la data science. En vous plongeant dans cette aventure, vous découvrirez comment les données deviennent une source d’insights stratégiques, ouvrant la voie à des solutions impactantes pour le monde d’aujourd’hui et de demain.
     """)
-    st.markdown("""
-                Groupe : Mathieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui
+    st.write("""Groupe : Mathieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui
                 Promation : Mai 24 CDS
                 Tuteur : Sébastien Sime
                 Date de Soutenance : 18 Mars 2025
