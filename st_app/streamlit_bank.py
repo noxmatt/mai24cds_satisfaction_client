@@ -43,8 +43,11 @@ if page == pages[0]:
                 Tuteur : Sébastien Sime
                 Date de Soutenance : 18 Mars 2025
                 LinkedIn du groupe : 
+             
                 https://www.linkedin.com/in/matthieu-karr-6856a93a/
+             
                 https://www.linkedin.com/in/catherine-otieno-0537b9157/
+             
                 https://www.linkedin.com/in/ielhasnaoui-photonicsengineer/
                 """)
 
