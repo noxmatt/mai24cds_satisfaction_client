@@ -48,7 +48,7 @@ if page == pages[0]:
                 https://www.linkedin.com/in/matthieu-karr-6856a93a/
                 https://www.linkedin.com/in/catherine-otieno-0537b9157/
                 https://www.linkedin.com/in/ielhasnaoui-photonicsengineer/
-                """
+                """)
 
 ##############################################################################
 # PAGE 1
