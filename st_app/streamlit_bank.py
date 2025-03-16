@@ -981,7 +981,7 @@ st.write(df['topic'].value_counts())
                         "Définissez la taille de l'échantillon",
                         min_value=10000,
                         max_value=max(len(df_clean)),
-                        value=10000,
+                        value=50000,
                         step=5000,
                     )
 
@@ -1089,7 +1089,7 @@ elif page == pages[5]:
         "Taille du jeu de données",
         min_value=100,
         max_value=len(filtered_df),
-        value=len(filtered_df),
+        value=10000,
         step=100,
         key="slider_data_size2",
     )
