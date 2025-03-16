@@ -1042,6 +1042,76 @@ st.write(df['topic'].value_counts())
                     st.write(f"Termes pour le sujet {selected_topic}:")
                     st.write(topic_model.get_topic(selected_topic))
 
+        if st.checkbox("Méthode Bertopics2", key="bertopics2"):   
+                import pandas as pd
+                import numpy as np
+                from bertopic import BERTopic
+                from transformers import pipeline
+
+                # Mise en cache pour le chargement et le nettoyage des données
+                @st.cache_data
+                def load_and_clean_data(filepath):
+                    df = pd.read_csv(filepath)
+                    df = df[df.rating != 3]
+                    df["rating_2"] = df.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
+                    df["avis_clean"] = df["avis_clean"].fillna("").astype(str)
+                    return df
+
+                # Mise en cache pour les embeddings
+                @st.cache_data
+                def generate_embeddings(avis, embedder):
+                    embeddings = embedder(avis, truncation=True, padding=True, max_length=512)
+                    return np.array([embedding[0][0] for embedding in embeddings])
+
+                # Mise en cache pour le pipeline d'encodage
+                @st.cache_resource
+                def create_embedder():
+                    return pipeline("feature-extraction", model="camembert-base", tokenizer="camembert-base")
+
+                # Chargement des données
+                df_clean = load_and_clean_data("st_app/df_clean.csv")
+
+                # Filtrage des entreprises via une liste déroulante
+                selected_company = st.selectbox(
+                    "Choisissez une entreprise",
+                    options=df_clean["company"].unique(),  # Remplacez 'company' par la colonne qui identifie les entreprises
+                )
+
+                # Filtrer les données pour l'entreprise sélectionnée
+                df_filtered = df_clean[df_clean["company"] == selected_company]
+                st.write(f"Nombre d'avis pour {selected_company} : {len(df_filtered)}")
+
+                if len(df_filtered) > 0:
+                    # Génération des embeddings pour l'entreprise sélectionnée
+                    st.write("### Génération des embeddings")
+                    with st.spinner(f"Encodage des avis pour {selected_company}..."):
+                        embedder = create_embedder()
+                        embeddings = generate_embeddings(df_filtered["avis_clean"].tolist(), embedder)
+
+                    # Extraction des sujets avec BERTopic
+                    topic_model = BERTopic(language="french")
+                    st.write("### Extraction des sujets avec BERTopic")
+                    with st.spinner(f"Extraction des sujets pour {selected_company}..."):
+                        topics, probabilities = topic_model.fit_transform(df_filtered["avis_clean"].tolist(), embeddings)
+
+                    # Ajouter les sujets au DataFrame et afficher les résultats
+                    df_filtered["topics"] = topics
+                    st.write("Sujets extraits :")
+                    st.write(df_filtered[["avis_clean", "topics"]].head())
+
+                    # Afficher les termes pour un sujet donné
+                    selected_topic = st.number_input(
+                        "Choisissez un sujet pour afficher ses termes",
+                        min_value=0,
+                        max_value=max(topics),
+                        value=0,
+                    )
+                    st.write(f"Termes pour le sujet {selected_topic}:")
+                    st.write(topic_model.get_topic(selected_topic))
+                else:
+                    st.write("Aucun avis disponible pour l'entreprise sélectionnée.")
+
+
 ##############################################################################
 # PAGE 5
 ##############################################################################
