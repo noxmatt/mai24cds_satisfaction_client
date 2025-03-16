@@ -1022,145 +1022,144 @@ st.write(df['topic'].value_counts())
 
                     display(topic_model.get_topic(0))  # Afficher les termes pour le sujet 0""")
 
+                    if st.checkbox("Cas pratique", key="cas_pratique"):
+                        st.write("Cas pratique")
+                        from sklearn.feature_extraction.text import CountVectorizer
+                        from sklearn.decomposition import LatentDirichletAllocation
+                        import pandas as pd
+                        from nltk.corpus import stopwords
+                        import nltk
 
-            if st.checkbox("Cas pratique", key="cas_pratique"):
-                st.write("Cas pratique")
-                from sklearn.feature_extraction.text import CountVectorizer
-                from sklearn.decomposition import LatentDirichletAllocation
-                import pandas as pd
-                from nltk.corpus import stopwords
-                import nltk
+                        nltk.download("stopwords")
+                        import numpy as np
+                        import joblib
 
-                nltk.download("stopwords")
-                import numpy as np
-                import joblib
+                        # Charger les stop words par défaut
+                        try:
+                            stop_words_default = stopwords.words("french")
+                        except:
+                            st.warning(
+                                "Téléchargez le corpus stopwords pour NLTK si ce n'est pas encore fait :"
+                            )
+                            st.code("import nltk\nnltk.download('stopwords')")
+                            stop_words_default = []
 
-                # Charger les stop words par défaut
-                try:
-                    stop_words_default = stopwords.words("french")
-                except:
-                    st.warning(
-                        "Téléchargez le corpus stopwords pour NLTK si ce n'est pas encore fait :"
+                        # Charger et préparer les données
+                        df_clean = pd.read_csv("st_app/df_clean.csv")
+                        df_clean = df_clean[df_clean.rating != 3]
+                        df_clean["rating_2"] = df_clean.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
+                        df_clean["avis"] = df_clean["avis_clean"].fillna("").astype(str)
+
+                        df_global = pd.read_csv("st_app/df_global.csv")
+                        df_global = df_global[df_global.rating != 3]
+                        df_global["rating_2"] = df_global.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
+                        df_global["avis"] = df_global["avis_global"].fillna("").astype(str)
+
+                        # Ajouter une option pour sélectionner le jeu de données
+                        st.write("### Choix de la source de données")
+                        data_source = st.radio(
+                            "Sélectionnez la source de données :", options=["df_clean", "df_global"]
                         )
-                    st.code("import nltk\nnltk.download('stopwords')")
-                    stop_words_default = []
 
-                    # Charger et préparer les données
-                    df_clean = pd.read_csv("st_app/df_clean.csv")
-                    df_clean = df_clean[df_clean.rating != 3]
-                    df_clean["rating_2"] = df_clean.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
-                    df_clean["avis"] = df_clean["avis_clean"].fillna("").astype(str)
+                        if data_source == "df_clean":
+                            df = df_clean[["avis", "rating_2", "company"]]
+                        else:
+                            df = df_global[["avis", "rating_2", "company"]]
 
-                    df_global = pd.read_csv("st_app/df_global.csv")
-                    df_global = df_global[df_global.rating != 3]
-                    df_global["rating_2"] = df_global.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
-                    df_global["avis"] = df_global["avis_global"].fillna("").astype(str)
+                        # Filtrage par entreprise
+                        company_name = st.selectbox("Choisissez une entreprise", df["company"].unique())
+                        filtered_df = df[df["company"] == company_name]
 
-                    # Ajouter une option pour sélectionner le jeu de données
-                    st.write("### Choix de la source de données")
-                    data_source = st.radio(
-                        "Sélectionnez la source de données :", options=["df_clean", "df_global"]
-                    )
+                        # Filtrage interactif
+                        data_size = st.slider(
+                            "Taille du jeu de données",
+                            min_value=100,
+                            max_value=len(filtered_df),
+                            value=10000,
+                            step=100,
+                            key="slider_data_size2",
+                        )
+                        filtered_df = filtered_df.sample(n=data_size, random_state=42)
 
-                    if data_source == "df_clean":
-                        df = df_clean[["avis", "rating_2", "company"]]
-                    else:
-                        df = df_global[["avis", "rating_2", "company"]]
+                        # Ajouter des scénarios fixes pour les n-grammes
+                        st.write("### Scénarios des n-grammes")
+                        ngram_scenarios = {
+                            "Vision normale (1,1)": (1, 1),
+                            "Bi-gram (2,2)": (2, 2),
+                            "Tri-gram (3,3)": (3, 3),
+                        }
+                        selected_scenario = st.radio(
+                            "Choisissez un scénario n-gram :", options=list(ngram_scenarios.keys())
+                        )
+                        ngram_range = ngram_scenarios[selected_scenario]
 
-                    # Filtrage par entreprise
-                    company_name = st.selectbox("Choisissez une entreprise", df["company"].unique())
-                    filtered_df = df[df["company"] == company_name]
+                        st.write(f"Vous avez choisi le scénario : {selected_scenario} avec n-gram = {ngram_range}")
 
-                    # Filtrage interactif
-                    data_size = st.slider(
-                        "Taille du jeu de données",
-                        min_value=100,
-                        max_value=len(filtered_df),
-                        value=10000,
-                        step=100,
-                        key="slider_data_size2",
-                    )
-                    filtered_df = filtered_df.sample(n=data_size, random_state=42)
+                        # Ajouter des entrées pour paramétrer le nombre de mots et de sujets
+                        st.write("### Paramètres des sujets et des mots-clés")
+                        n_topics = st.number_input(
+                            "Nombre de sujets", min_value=1, max_value=5, value=3, step=1, key="num_topics"
+                        )
+                        n_top_words = st.number_input(
+                            "Nombre de mots-clés par sujet",
+                            min_value=1,
+                            max_value=8,
+                            value=5,
+                            step=1,
+                            key="num_top_words",
+                        )
 
-                    # Ajouter des scénarios fixes pour les n-grammes
-                    st.write("### Scénarios des n-grammes")
-                    ngram_scenarios = {
-                        "Vision normale (1,1)": (1, 1),
-                        "Bi-gram (2,2)": (2, 2),
-                        "Tri-gram (3,3)": (3, 3),
-                    }
-                    selected_scenario = st.radio(
-                        "Choisissez un scénario n-gram :", options=list(ngram_scenarios.keys())
-                    )
-                    ngram_range = ngram_scenarios[selected_scenario]
-
-                    st.write(f"Vous avez choisi le scénario : {selected_scenario} avec n-gram = {ngram_range}")
-
-                    # Ajouter des entrées pour paramétrer le nombre de mots et de sujets
-                    st.write("### Paramètres des sujets et des mots-clés")
-                    n_topics = st.number_input(
-                        "Nombre de sujets", min_value=1, max_value=5, value=3, step=1, key="num_topics"
-                    )
-                    n_top_words = st.number_input(
-                        "Nombre de mots-clés par sujet",
-                        min_value=1,
-                        max_value=8,
-                        value=5,
-                        step=1,
-                        key="num_top_words",
-                    )
-
-                    # Ajouter des stop words supplémentaires
-                    stop_words_input = st.text_area(
-                        "Stop words supplémentaires à enlever (séparés par une virgule)", ""
-                    )
-                    user_stop_words = [
-                        word.strip() for word in stop_words_input.split(",") if word.strip()
-                    ]
-                    all_stop_words = list(stop_words_default + user_stop_words)
-
-                    # Fonction pour extraire les sujets avec LDA et calculer la représentativité
-                    def analyze_topics_with_representativity(
-                        reviews, n_topics, n_top_words, stop_words=None, ngram_range=(2, 2)
-                    ):
-                        vectorizer = CountVectorizer(stop_words=stop_words, ngram_range=ngram_range)
-                        X = vectorizer.fit_transform(reviews)
-
-                        lda = LatentDirichletAllocation(n_components=n_topics, random_state=42)
-                        topic_distributions = lda.fit_transform(X)
-
-                        feature_names = vectorizer.get_feature_names_out()
-                        topics = [
-                            [feature_names[i] for i in topic.argsort()[: -n_top_words - 1: -1]]
-                            for topic in lda.components_
+                        # Ajouter des stop words supplémentaires
+                        stop_words_input = st.text_area(
+                            "Stop words supplémentaires à enlever (séparés par une virgule)", ""
+                        )
+                        user_stop_words = [
+                            word.strip() for word in stop_words_input.split(",") if word.strip()
                         ]
-                        return topics, topic_distributions
+                        all_stop_words = list(stop_words_default + user_stop_words)
 
-                    # Création des colonnes pour affichage des avis positifs et négatifs
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        st.header("### Sujets pour les avis positifs")
-                        positive_reviews = filtered_df[filtered_df["rating_2"] == 1]["avis"]
-                        positive_topics, positive_distributions = analyze_topics_with_representativity(
-                            positive_reviews,
-                            n_topics=n_topics,
-                            n_top_words=n_top_words,
-                            stop_words=all_stop_words,
-                            ngram_range=ngram_range,
-                        )
-                        st.write(positive_topics)
+                        # Fonction pour extraire les sujets avec LDA et calculer la représentativité
+                        def analyze_topics_with_representativity(
+                            reviews, n_topics, n_top_words, stop_words=None, ngram_range=(2, 2)
+                        ):
+                            vectorizer = CountVectorizer(stop_words=stop_words, ngram_range=ngram_range)
+                            X = vectorizer.fit_transform(reviews)
 
-                    with col2:
-                        st.header("### Sujets pour les avis négatifs")
-                        negative_reviews = filtered_df[filtered_df["rating_2"] == -1]["avis"]
-                        negative_topics, negative_distributions = analyze_topics_with_representativity(
-                            negative_reviews,
-                            n_topics=n_topics,
-                            n_top_words=n_top_words,
-                            stop_words=all_stop_words,
-                            ngram_range=ngram_range,
-                        )
-                        st.write(negative_topics)
+                            lda = LatentDirichletAllocation(n_components=n_topics, random_state=42)
+                            topic_distributions = lda.fit_transform(X)
+
+                            feature_names = vectorizer.get_feature_names_out()
+                            topics = [
+                                [feature_names[i] for i in topic.argsort()[: -n_top_words - 1: -1]]
+                                for topic in lda.components_
+                            ]
+                            return topics, topic_distributions
+
+                        # Création des colonnes pour affichage des avis positifs et négatifs
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            st.header("### Sujets pour les avis positifs")
+                            positive_reviews = filtered_df[filtered_df["rating_2"] == 1]["avis"]
+                            positive_topics, positive_distributions = analyze_topics_with_representativity(
+                                positive_reviews,
+                                n_topics=n_topics,
+                                n_top_words=n_top_words,
+                                stop_words=all_stop_words,
+                                ngram_range=ngram_range,
+                            )
+                            st.write(positive_topics)
+
+                        with col2:
+                            st.header("### Sujets pour les avis négatifs")
+                            negative_reviews = filtered_df[filtered_df["rating_2"] == -1]["avis"]
+                            negative_topics, negative_distributions = analyze_topics_with_representativity(
+                                negative_reviews,
+                                n_topics=n_topics,
+                                n_top_words=n_top_words,
+                                stop_words=all_stop_words,
+                                ngram_range=ngram_range,
+                            )
+                            st.write(negative_topics)
 
 
 ##############################################################################
