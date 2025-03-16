@@ -970,77 +970,57 @@ st.write(df['topic'].value_counts())
 
             # le topic modeling pour connaitre les themes les plus importants
             if st.checkbox("J'affiche le code", key="bertopic2"):
-                    # Charger le jeu de données principal
-                    st.write("Analyse avec BERTopic")
-                    df_clean = pd.read_csv(
-                        "st_app/df_clean.csv"
-                    )
-                    df_clean = df_clean[df_clean.rating != 3]
-                    df_clean["rating_2"] = df_clean.rating.replace(
-                        [1, 2, 3, 4, 5], [-1, -1, 1, 1, 1]
-                    )
-                    df_clean["avis_clean"] = df_clean["avis_clean"].fillna("").astype(str)
+                    st.write("""
+                    import pandas as pd
+                    import numpy as np
+                    from bertopic import BERTopic
+                    from transformers import pipeline
+                    # allèger le jeu de données pour le temps de traitement
 
-                    # Afficher un aperçu du DataFrame
-                    st.write("Aperçu des données :")
-                    st.dataframe(df_clean.head())
+                    # Définition de la taille de l'échantillon
+                    sample_size = 100000
 
-                    # Option pour définir la taille de l'échantillon
-                    sample_size = st.number_input(
-                        "Définissez la taille de l'échantillon",
-                        min_value=10000,
-                        max_value=len(df_clean),
-                        value=50000,
-                        step=5000,
-                    )
+                    # Générer des echantillons aléatoires selon une distribution normale
+                    indices = np.random.choice(df.index, size=sample_size, replace=False)
 
-                    # Générer un échantillon aléatoire
-                    indices = np.random.choice(
-                        df_clean.index, size=sample_size, replace=False
-                    )
-                    df_sample = df_clean.loc[indices]
-                    st.write(f"Échantillon de {sample_size} lignes généré.")
+                    # Sélectionner les lignes correspondantes
+                    df_sample = df.loc[indices]
+
+                    # Afficher le DataFrame échantillonné
+                    print(df_sample)
 
                     # Préparer les avis pour BERTopic
-                    avis = df_sample["avis_clean"].tolist()
+                    avis = df_sample['avis_clean'].tolist()
 
-                    # Créer un pipeline d'encodage Camembert
-                    st.write("### Génération des embeddings")
-                    with st.spinner("Encodage des avis avec Camembert..."):
-                        embedder = pipeline(
-                            "feature-extraction",
-                            model="camembert-base",
-                            tokenizer="camembert-base",
-                        )
-                        embeddings = []
-                        for avis_item in avis:
-                            embedding = embedder(
-                                avis_item, truncation=True, padding=True, max_length=512
-                            )
-                            embeddings.append(embedding[0][0])
+                    # Vérifier le type de chaque avis
+                    #assert all(isinstance(a, str) for a in avis), "Tous les avis doivent être de type 'str'"
 
-                        embeddings = np.array(embeddings)
+                    # Créer un pipeline d'encodage Camembert (modèle BERT pour le français)
+                    embedder = pipeline("feature-extraction", model="camembert-base", tokenizer="camembert-base")
 
-                    # Créer un modèle BERTopic
+                    # Generate embeddings for each avis, handling variable sequence lengths
+                    embeddings = []
+                    for avis_item in avis:
+                        embedding = embedder(avis_item, truncation=True, padding=True, max_length=512)  # Adjust max_length as needed
+                        embeddings.append(embedding[0][0])
+
+                    # Convert the embeddings to a 2D NumPy array
+                    embeddings = np.array(embeddings)
+
+                    # Reshape the embeddings to have a single column if needed
+                    # embeddings = embeddings.reshape(-1, 1)  #This line is no longer needed
+
+                    # Créer un modèle BERTopic en utilisant les embeddings
                     topic_model = BERTopic(language="french")
-                    st.write("### Extraction des sujets avec BERTopic")
-                    with st.spinner("Extraction des sujets..."):
-                        topics, probabilities = topic_model.fit_transform(avis, embeddings)
+                    topics, probabilities = topic_model.fit_transform(avis, embeddings)
 
-                    # Ajouter les sujets au DataFrame
-                    df_sample["topics"] = topics
-                    st.write("Sujets extraits :")
-                    st.write(df_sample[["avis_clean", "topics"]].head())
+                    # Ajouter les sujets trouvés au DataFrame
+                    df_sample['topics'] = topics
 
-                    # Afficher les termes pour un sujet donné
-                    selected_topic = st.number_input(
-                        "Choisissez un sujet pour afficher ses termes",
-                        min_value=0,
-                        max_value=len(topics) - 1,
-                        value=0,
-                    )
-                    st.write(f"Termes pour le sujet {selected_topic}:")
-                    st.write(topic_model.get_topic(selected_topic))
+                    # Afficher les résultats
+
+
+                    display(topic_model.get_topic(0))  # Afficher les termes pour le sujet 0""")
 
 
 ##############################################################################
