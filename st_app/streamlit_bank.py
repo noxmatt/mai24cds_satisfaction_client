@@ -1022,7 +1022,7 @@ st.write(df['topic'].value_counts())
 
                     display(topic_model.get_topic(0))  # Afficher les termes pour le sujet 0""")
 
-                    if st.checkbox("Cas pratique", key="cas_pratique"):
+            if st.checkbox("Cas pratique", key="cas_pratique"):
                         st.write("Cas pratique")
                         from sklearn.feature_extraction.text import CountVectorizer
                         from sklearn.decomposition import LatentDirichletAllocation
