@@ -1161,7 +1161,7 @@ st.write(df['topic'].value_counts())
 ##############################################################################
 # PAGE 6
 ##############################################################################
-elif page == pages[6]:
+elif page == pages[5]:
     st.write("### Conclusion")
     st.write("""
     Notre projet a permis d’identifier les principaux facteurs influençant la satisfaction client et de comparer
