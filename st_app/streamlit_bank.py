@@ -17,8 +17,7 @@ pages = [
     "Exploration & Pré-traitement des données",
     "Analyse des données",
     "Modélisation & Prédictions",
-    "Cas pratique",
-    "Conclusion",
+    "Conclusion"
 ]
 
 page = st.sidebar.radio("Aller à la page:", pages)
@@ -844,14 +843,7 @@ de variables indépendantes."""
             "A présent pour verifier notre modele pré entrainé avec les hyperparametres,"
             "nous lui passons de nouveaux commentaires a analyser"
         )
-        # import joblib
-        # from sklearn.feature_extraction.text import CountVectorizer
-        # vectorisation = CountVectorizer()
-        # model_lr = joblib.load(r"C:\Users\matth\OneDrive\Formation\st_app\model_lr_pipe")
-        # comment = st.text_area(
-        #    "Commentaire d'au moins une phrase avec 5 mots minimum (séparés par une virgule)', '")
-        # comment_token = vectorisation.transform(comment)
-        # st.write(model_lr.predict(comment_token.toarray()))
+        
         import joblib
 
         # Chargement du modèle pré-entraîné (incluant la vectorisation)
