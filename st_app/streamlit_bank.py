@@ -1024,26 +1024,26 @@ st.write(df['topic'].value_counts())
 
 
             if st.checkbox("Cas pratique", key="cas_pratique"):
-                    st.write("Cas pratique")
-                    from sklearn.feature_extraction.text import CountVectorizer
-                    from sklearn.decomposition import LatentDirichletAllocation
-                    import pandas as pd
-                    from nltk.corpus import stopwords
-                    import nltk
+                st.write("Cas pratique")
+                from sklearn.feature_extraction.text import CountVectorizer
+                from sklearn.decomposition import LatentDirichletAllocation
+                import pandas as pd
+                from nltk.corpus import stopwords
+                import nltk
 
-                    nltk.download("stopwords")
-                    import numpy as np
-                    import joblib
+                nltk.download("stopwords")
+                import numpy as np
+                import joblib
 
-                    # Charger les stop words par défaut
-                    try:
-                        stop_words_default = stopwords.words("french")
-                    except:
-                        st.warning(
-                            "Téléchargez le corpus stopwords pour NLTK si ce n'est pas encore fait :"
+                # Charger les stop words par défaut
+                try:
+                    stop_words_default = stopwords.words("french")
+                except:
+                    st.warning(
+                        "Téléchargez le corpus stopwords pour NLTK si ce n'est pas encore fait :"
                         )
-                        st.code("import nltk\nnltk.download('stopwords')")
-                        stop_words_default = []
+                    st.code("import nltk\nnltk.download('stopwords')")
+                    stop_words_default = []
 
                     # Charger et préparer les données
                     df_clean = pd.read_csv("st_app/df_clean.csv")
