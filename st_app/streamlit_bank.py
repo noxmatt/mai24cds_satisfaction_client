@@ -909,8 +909,15 @@ de variables indépendantes."""
         )
         if st.checkbox("Méthode LDA", key="lda2"):
             # le topic modeling pour connaitre les themes les plus importants
-            st.write("""LDA un modèle probabiliste qui détecte des thèmes latents en analysant les fréquences de mots dans les documents,
-            sans tenir compte du contexte sémantique profond.""")
+            st.subheader("""LDA (Latent Dirichlet Allocation) :""")
+            st.write("""--LDA un modèle probabiliste qui détecte des thèmes latents en analysant les fréquences de mots dans les documents,
+            sans tenir compte du contexte sémantique profond.--            
+            L'allocation de Dirichlet latente (LDA) est un modèle génératif probabiliste utilisé pour découvrir des sujets abstraits dans
+            une collection de documents. Elle suppose que chaque document est un mélange de plusieurs sujets et que chaque sujet est un
+            mélange de mots. LDA est une technique de modélisation de sujets qui applique l'apprentissage non supervisé sur de grands ensembles
+            de données textuelles pour produire un ensemble résumé de termes représentant les principaux sujets de la collection.
+            Elle est largement utilisée en traitement du langage naturel (NLP) pour analyser les tendances et les thèmes dans les textes
+         """)
             if st.checkbox("J'affiche le code", key="lda3"):
                 code_lda = r"""
 from sklearn.decomposition import LatentDirichletAllocation
@@ -1181,6 +1188,11 @@ elif page == pages[5]:
 ##############################################################################
 elif page == pages[6]:
     st.write("### Conclusion")
-    st.write(
-        "Nous avons pu extraire, nettoyer et analyser les avis de clients de banques en ligne. Nous avons pu identifier les thématiques récurrentes dans les avis, et avons pu prédire la satisfaction client à partir de ces informations. Nous avons également pu mettre en place une méthodologie robuste pour l'analyse des avis clients à grande échelle, transposable à d'autres secteurs."
-    )
+    st.write("""
+    Notre projet a permis d’identifier les principaux facteurs influençant la satisfaction client et de comparer
+    différentes approches de modélisation thématique. L’analyse des avis clients offre aux banques en ligne un levier
+    stratégique pour améliorer leurs services et fidéliser leur clientèle.
+            
+    Nous avons atteint une précision finale de 97% avec la régression logistique et le Random Over Sampler et identifié
+    ces cinq clusters principaux via la LDA. Le BERTopic a permis une meilleure détection des thèmes avec des embeddings BERT.
+         """)
