@@ -879,14 +879,11 @@ de variables indépendantes."""
         st.write("Pour vérifier notre modèle pré-entraîné avec ses hyperparamètres, utilisons des commentaires non connu du jeu de données.")
 
         # Zone de saisie pour le commentaire
-        #comment = st.text_area("Commentaire (au moins une phrase avec 10 mots minimum, idéalement) :")
-        comment = st.text_input("""Toujours aucune réponse, après que vous m'ayez demander plus d'informations, cela est de trop la prochaine étape sera de déposer une plainte tout simplement à votre encontre. Je remarque que je ne suis pas la seule dans cette histoire qui ressemble trait pour trait à une arnaque bien ficelée......",
-               "Une gestion facile et rapide de ses comptes.La possibilité de souscrire à une assurance vie en quelques clics.Notre argent finance des projets positifs en lien avec nos objectifs climatiques.Je recommande fortement !Quittons les banques traditionnelles ultra polluantes !",
-                "Des arnaqueurs à l’exposant 20. Depuis 2 mois mon compte a été bloqué. J’ai envoyé tous les justificatifs pourtant aucun effort de retour. L’application reste toujours bloqué avec le même message. Je vous donne quelques jours encore pour avoir mon compte débloqué et recevoir mon virement sinon vous saurez que ce n’est pas à tous les clients on fait ces bails. Vous ne respectez aucune réglementation en terme de délai de réponse pour un compte bloqué. Vous êtes prévenus",
-                "je viens enfin de récupérer mon traitement apres de grosses difficultés dans la livraison ( UPS n’est pas des plus efficae). au dela de cet incident le suivi effectué par Marhis est top. il a ete disponible, il a suivi l’expédition. j’ai reussi à recevoir mon traitement alors 1000 merci à lui. Les informations fournies par Mathis sont claires désormais la prochaine etape est la prise de rdv pour commencer le traitement.""")
+        comment = st.text_area("Commentaire (au moins une phrase avec 10 mots minimum, idéalement) :")
+        
         if comment:  # Vérification de la saisie d'un commentaire
             try:
-                # Utilisation du pipeline pour effectuer la prédiction
+                # Utilisation du model pour effectuer la prédiction
                 prediction = model_lr.predict([comment])[0]  # Obtenir la classe prédite
                 probabilities = model_lr.predict_proba([comment])  # Les probabilités associées aux classes
 
