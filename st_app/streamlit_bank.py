@@ -867,7 +867,7 @@ de variables indépendantes."""
         """)
 
         st.write(
-            "A présent pour verifier notre modele pré entrainé avec les hyperparametres,"
+            "A présent pour tester notre modele nous lui passons le modele pré-entrainé avec les hyperparametres,"
             "nous lui passons de nouveaux commentaires a analyser"
         )
         
