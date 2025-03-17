@@ -882,11 +882,11 @@ de variables indépendantes."""
         import streamlit as st
 
 # Titre de l'application
-        st.subheader("Analyse de commentaire avec un modèle pré-entraîné et optimisé")
-        st.write("Pour vérifier notre modèle pré-entraîné avec ses hyperparamètres, nous allons analyser de nouveaux commentaires.")
+        st.subheader("Test du modèle pré-entraîné et optimisé")
+        st.write("Pour vérifier notre modèle pré-entraîné avec ses hyperparamètres, utilisons des commentaires non connu du jeu de données.")
 
         # Zone de saisie pour le commentaire
-        comment = st.text_area("Commentaire (au moins une phrase avec 5 mots minimum, idéalement) :")
+        comment = st.text_area("Commentaire (au moins une phrase avec 10 mots minimum, idéalement) :")
 
         if comment:  # Vérification de la saisie d'un commentaire
             try:
