@@ -22,7 +22,7 @@ pages = [
 
 page = st.sidebar.radio("Aller à la page:", pages)
 
-st.write(r"""Groupe : Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui
+st.sidebar(r"""Groupe : Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui
                 Promation : Mai 24 CDS
                 Tuteur : Sébastien Sime
                 Date de Soutenance : 18 Mars 2025
