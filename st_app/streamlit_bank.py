@@ -761,11 +761,12 @@ de variables indépendantes."""
         Les résultats sont bons avec ces deux méthodes, car leur accuracy est équivalente : 0.97 pour l'une et 0.96 pour l'autre.
 
         - **Choix méthodologique** :  
-        Nous avons décidé de nous orienter vers la méthode **RandomOverSampler** pour la suite de notre étude. Cette méthode nous semble plus simple à comprendre et à appréhender pour les prochaines étapes de notre projet.
+        Nous avons décidé de nous orienter vers la méthode **RandomOverSampler** pour la suite de notre étude. 
+        Cette méthode nous semble plus simple à comprendre et à appréhender pour les prochaines étapes de notre projet.
 
         - **Performances spécifiques** :  
         - La méthode **RandomOverSampler** est plus performante pour les **notes positives**.  
-        - La méthode **FunctionSampler** est plus performante pour les **notes négatives**.  
+        La méthode **FunctionSampler** est plus performante pour les **notes négatives**.  
 
         Ces deux méthodes sont complémentaires et offrent des avantages distincts selon les types de données analysées.
         """)
