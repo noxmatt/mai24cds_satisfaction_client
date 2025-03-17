@@ -658,10 +658,7 @@ de variables indépendantes."""
         )
 
     if st.checkbox("#Rééquilibrage des données"):
-        st.markdown(r"""
-    ### Pour équilibrer un dataset
-
-    Nous utilisons deux approches complémentaires : le **suréchantillonnage** et le **sous-échantillonnage**.
+        st.markdown(r"""Nous utilisons deux approches complémentaires : le **suréchantillonnage** et le **sous-échantillonnage**.
 
     ---
 
