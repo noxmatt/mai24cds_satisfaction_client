@@ -968,7 +968,7 @@ st.write(df['topic'].value_counts())
                 st.code(code_lda, language="python")
 
             st.image("st_app/LDA10thm.png")
-            st.write(Graphique de gensimvis pour les 8 thèmes les plus importants)
+            st.write("""Graphique de gensimvis pour les 8 thèmes les plus importants""")
             st.image("st_app/lda_graph8.png")
 
         if st.checkbox("Méthode Bertopics", key="bertopics1"):
