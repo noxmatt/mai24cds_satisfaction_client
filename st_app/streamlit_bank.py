@@ -658,22 +658,27 @@ de variables indépendantes."""
         )
 
     if st.checkbox("#Rééquilibrage des données"):
-        st.markdown(r"""Pour équilibrer un dataset, nous utilisons deux approches complémentaires : le suréchantillonnage et le sous-échantillonnage.
+        st.markdown(r"""
+    ### Pour équilibrer un dataset
 
-            Suréchantillonnage (**Oversampling**) Cette méthode augmente la représentation des classes minoritaires en générant de nouveaux exemples. Trois techniques couramment utilisées sont :
+    Nous utilisons deux approches complémentaires : le **suréchantillonnage** et le **sous-échantillonnage**.
 
-            **RandomOverSampler** : duplique certains échantillons minoritaires.
+    ---
 
-            **SMOTE** (Synthetic Minority Oversampling Technique) : crée des exemples synthétiques en interpolant entre les voisins.
+    #### Suréchantillonnage (**Oversampling**)
 
-            **ADASYN** (Adaptive Synthetic Sampling) : génère davantage d’exemples autour des cas mal classés.
+    Cette méthode augmente la représentation des classes minoritaires en générant de nouveaux exemples. Trois techniques couramment utilisées sont :
+    - **RandomOverSampler** : duplique certains échantillons minoritaires.
+    - **SMOTE** (*Synthetic Minority Oversampling Technique*) : crée des exemples synthétiques en interpolant entre les voisins.
+    - **ADASYN** (*Adaptive Synthetic Sampling*) : génère davantage d’exemples autour des cas mal classés.
 
-            Sous-échantillonnage (**Undersampling**) Cette méthode réduit la taille des classes majoritaires. Par exemple, la technique Tomek Links identifie les échantillons majoritaires se trouvant
-            à proximité immédiate des exemples minoritaires et les élimine, atténuant ainsi le déséquilibre.
+    ---
 
-            L’utilisation combinée de ces techniques améliore la robustesse et la fiabilité des modèles prédictifs tout en optimisant la performance et la précision des systèmes de classification.
-            """
-        )
+    #### Sous-échantillonnage (**Undersampling**)
+
+    Cette méthode réduit la taille des classes majoritaires. Par exemple, la technique **Tomek Links** identifie les échantillons majoritaires se trouvant à proximité immédiate des exemples minoritaires et les élimine, atténuant ainsi le déséquilibre.
+
+    ---
 
         import pandas as pd
         import streamlit as st
