@@ -44,7 +44,7 @@ st.sidebar.markdown(r"""
 <a href="https://www.linkedin.com/in/ielhasnaoui-photonicsengineer/" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="20" style="vertical-align:middle;margin-right:10px;">Ikram El Hasnaoui</a>
 
-**GitHub du groupe :**  
+**GitHub du projet :**  
 <a href="https://github.com/noxmatt/mai24cds_satisfaction_client.git" target="_blank">
     <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20" style="vertical-align:middle;margin-right:10px;">mai24cds_satisfaction_client</a>
 
