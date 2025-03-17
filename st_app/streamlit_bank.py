@@ -804,87 +804,77 @@ de variables indépendantes."""
             "Affichage du code utilisé pour faire la recherche d'hyperparamètres"
         ):
             code_hyper = """
-        !pip install -U imbalanced-learn
-        import numpy as np
-        import pandas as pd
-        from sklearn.model_selection import train_test_split, GridSearchCV
-        from sklearn.metrics import accuracy_score, precision_score, recall_score, classification_report
-        from sklearn.feature_extraction.text import CountVectorizer
-        from sklearn.pipeline import Pipeline
-        from sklearn.preprocessing import MaxAbsScaler, FunctionTransformer
-        from sklearn.linear_model import LogisticRegression
-        from imblearn.pipeline import Pipeline as ImbPipeline
-        from imblearn.over_sampling import RandomOverSampler
-        from imblearn import FunctionSampler
-        import pandas as pd
-        import matplotlib.pyplot as plt
+    import numpy as np
+    import pandas as pd
+    from sklearn.model_selection import train_test_split, GridSearchCV
+    from sklearn.metrics import accuracy_score, precision_score, recall_score, classification_report
+    from sklearn.feature_extraction.text import CountVectorizer
+    from sklearn.pipeline import Pipeline
+    from sklearn.preprocessing import MaxAbsScaler, FunctionTransformer
+    from sklearn.linear_model import LogisticRegression
+    from imblearn.pipeline import Pipeline as ImbPipeline
+    from imblearn.over_sampling import RandomOverSampler
+    from imblearn import FunctionSampler
 
-        from google.colab import drive
-        drive.mount('/content/drive')
+    df = pd.read_csv("st_app/df_global.csv")
+    df = df[df.rating != 3]
+    df['rating_2'] = df.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
 
+    # Séparation des features et du target
+    X = df['avis_global']
+    y = df['rating_2']
 
+    # Transformation du texte en vecteur
+    vectorisation = CountVectorizer()
+    X = vectorisation.fit_transform(X.values.ravel())
 
-        # lecture du dataframe
-        df = pd.read_csv("/content/drive/MyDrive/df_global.csv")
-        #on sépare les notes en 2 catégories (-1,1,)
-        df = df[df.rating != 3]
-        df['rating_2'] = df.rating.replace([1,2,3,4,5],[-1,-1,1,1,1])
+    # Division des données en ensembles d'entraînement et de test
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-        # Séparation des features et du target
-        X = df['avis_global']
-        y = df['rating_2']
-
-        #transformation du texte en vecteur
-        vectorisation = CountVectorizer()
-        X = vectorisation.fit_transform(X.values.ravel())
-
-        # Division des données en ensembles d'entraînement et de test
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-        # Définition des pipelines
-        pipelines = [
-            {
-                'name': 'LogisticRegression',
-                'pipeline': ImbPipeline([
-                    ('sampler', FunctionSampler()),
-                    ('scaler', MaxAbsScaler()),
-                    ('classifier', LogisticRegression(random_state=42))
-                ]),
-                'param_grid': {
-                    'classifier__C': [0.001, 0.01, 0.1, 1.0, 2.0,100],
-                    'classifier__solver': ['lbfgs', 'liblinear'],
-                    'classifier__max_iter': [200, 500, 1000, 2000]
-                }
+    # Définition des pipelines
+    pipelines = [
+        {
+            'name': 'LogisticRegression',
+            'pipeline': ImbPipeline([
+                ('sampler', RandomOverSampler(random_state=42)),
+                ('scaler', MaxAbsScaler()),
+                ('classifier', LogisticRegression(random_state=42))
+            ]),
+            'param_grid': {
+                'classifier__C': [0.001, 0.01, 0.1, 1.0, 2.0, 100],
+                'classifier__solver': ['lbfgs', 'liblinear'],
+                'classifier__max_iter': [200, 500, 1000, 2000]
             }
-        ]
+        }
+    ]
 
-        # initialisation de la dictionnaire best_params_dict
-        best_params_dict = {}
+    # Initialisation du dictionnaire des meilleurs paramètres
+    best_params_dict = {}
 
-        # Utilisation de GridSearch pour chaque pipeline (Modèle)
-        for pipeline_dict in pipelines:
-            name = pipeline_dict['name']
-            pipeline = pipeline_dict['pipeline']
-            param_grid = pipeline_dict['param_grid']
+    # Utilisation de GridSearch pour chaque pipeline (Modèle)
+    for pipeline_dict in pipelines:
+        name = pipeline_dict['name']
+        pipeline = pipeline_dict['pipeline']
+        param_grid = pipeline_dict['param_grid']
 
-            grid_search = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy')
-            grid_search.fit(X_train, y_train)
+        grid_search = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy')
+        grid_search.fit(X_train, y_train)
 
-            print(f"--- {name} ---")
-            print("Best parameters:", grid_search.best_params_)
-            print("Best cross-validation score:", grid_search.best_score_)
+        print(f"--- {name} ---")
+        print("Best parameters:", grid_search.best_params_)
+        print("Best cross-validation score:", grid_search.best_score_)
 
-            # Stockage des meilleurs paramètres dans le dictionnaire
-            best_params_dict[name] = grid_search.best_params_
+        # Stockage des meilleurs paramètres dans le dictionnaire
+        best_params_dict[name] = grid_search.best_params_
 
-            # Évaluation sur le jeu de test
-            y_pred = grid_search.predict(X_test)
-            print(f"Classification Report:\n{classification_report(y_test, y_pred)}")
+        # Évaluation sur le jeu de test
+        y_pred = grid_search.predict(X_test)
+        print(f"Classification Report:\n{classification_report(y_test, y_pred)}")
 
-        # Affichage des meilleurs paramètres des modèles
-        print("\n--- Best Parameters for All Models ---")
-        for model_name, best_params in best_params_dict.items():
-            print(f"{model_name}: {best_params}")
+    # Affichage des meilleurs paramètres des modèles
+    print("\\n--- Best Parameters for All Models ---")
+    for model_name, best_params in best_params_dict.items():
+        print(f"{model_name}: {best_params}")
         """
             st.code(code_hyper, language="python")
 
