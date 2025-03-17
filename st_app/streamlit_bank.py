@@ -7,6 +7,7 @@ import io
 ##############################################################################
 # PAGE SOMMAIRE
 ##############################################################################
+st.sidebar.title("Sommaire")
 
 pages = [
     "Le projet",
@@ -20,6 +21,8 @@ pages = [
 page = st.sidebar.radio("Aller à la page:", pages)
 
 st.sidebar.subheader(r"""
+                     
+                     
 **Groupe :** Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui  
 **Promotion :** Mai 24 CDS  
 **Tuteur :** Sébastien Sime  
