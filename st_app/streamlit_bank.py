@@ -765,8 +765,8 @@ de variables indépendantes."""
         Cette méthode nous semble plus simple à comprendre et à appréhender pour les prochaines étapes de notre projet.
 
         - **Performances spécifiques** :  
-        - La méthode **RandomOverSampler** est plus performante pour les **notes positives**.  
-        La méthode **FunctionSampler** est plus performante pour les **notes négatives**.  
+        La méthode **RandomOverSampler** est plus performante pour les **notes positives** et la méthode **FunctionSampler**
+        est plus performante pour les **notes négatives**.  
 
         Ces deux méthodes sont complémentaires et offrent des avantages distincts selon les types de données analysées.
         """)
