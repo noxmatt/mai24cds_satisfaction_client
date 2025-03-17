@@ -907,12 +907,9 @@ de variables indépendantes."""
 
             except Exception as e:
                 st.error(f"Une erreur est survenue lors de la prédiction : {e}")
-
-
-        st.write("Nous voyons que les résultats sont bons")
-
         st.write(
-            """La partie modélisation nous à permi de calculer notre meilleur prédiction, nous devons maintenant nous concentrer sur la détection des thématiques, pour cela nous avons besoin de retravailler le contenu des avis"""
+            """La partie modélisation nous à permie de calculer notre meilleure prédiction, nous devons maintenant
+            nous concentrer sur la détection des thématiques, pour cela nous avons besoin de retravailler le contenu des avis"""
         )
 
     if st.checkbox("#Reconnaissance des thématiques avec LDA et Bertopics", key="lda1"):
@@ -933,7 +930,7 @@ de variables indépendantes."""
             Elle est largement utilisée en traitement du langage naturel (NLP) pour analyser les tendances et les thèmes dans les textes
          """)
             if st.checkbox("J'affiche le code", key="lda3"):
-                code_lda = r"""
+                code_lda = """
 from sklearn.decomposition import LatentDirichletAllocation
 from sklearn.feature_extraction.text import CountVectorizer
 
