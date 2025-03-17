@@ -714,14 +714,15 @@ de variables indépendantes."""
                  
     if st.checkbox("#Optimisation du scaler"):
         st.write(
-            st.markdown(r"""Après avoir équilibré les données, il est essentiel de normaliser leurs caractéristiques pour éviter tout biais
+            st.markdown(r"""
+                
+            Après avoir équilibré les données, il est essentiel de normaliser leurs caractéristiques pour éviter tout biais
             lié aux écarts d'échelle. Le **MaxAbsScaler** est particulièrement adapté aux données textuelles vectorisées car :
             - Il **conserve la sparsité** des matrices, optimisant ainsi les performances.
             - Il **met à l'échelle proportionnellement** dans l'intervalle [-1, 1], préservant les proportions initiales.
 
-            Passons maintenant au test du MaxAbsScaler et comparons les performances des deux méthodes de rééquilbrage retenues.
+            Passons maintenant au test du MaxAbsScaler et comparons les performances des deux méthodes de rééquilbrage retenus.
             """)
-
         )
         import pandas as pd
         import streamlit as st
