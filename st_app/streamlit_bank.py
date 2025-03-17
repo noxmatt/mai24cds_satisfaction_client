@@ -742,55 +742,22 @@ de variables indépendantes."""
         df_global["rating_2"] = df_global.rating.replace(
             [1, 2, 3, 4, 5], [-1, -1, 1, 1, 1]
         )
-        data_size = st.slider(
-            "Sélectionnez la taille du jeu de données",
-            min_value=100,
-            max_value=len(df_global),
-            value=50000,
-            step=100,
-            key="slider_data_size2",
-        )
-        df_global = df_global.sample(n=data_size, random_state=42)
-        df = df_global[["avis_global", "rating_2"]]
-
-        # Préparer les données
-        X = df[["avis_global"]]
-        y = df["rating_2"]
-
-        vectorisation = CountVectorizer()
-        X = vectorisation.fit_transform(X.values.ravel())
-
-        # Diviser les données en ensembles d'entraînement et de test
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2, random_state=42
-        )
-
-        # Initialiser le classificateur
-        classifier = LogisticRegression()
-        scaler = MaxAbsScaler()
-
+        
         # Sélecteur de méthode de rééchantillonnage
         resampling_method = st.selectbox(
             "Sélectionnez la méthode de rééchantillonnage",
             ["FunctionSampler", "RandomOverSampler"],
         )
 
-        # Créer le pipeline en fonction de la méthode sélectionnée
+        # Créer la liste  en fonction de la méthode sélectionnée
         if resampling_method == "FunctionSampler":
-            pipeline = make_pipeline(FunctionSampler(), scaler, classifier)
+            st.image("st_app/FS_samplerMXS.png")
         elif resampling_method == "RandomOverSampler":
-            pipeline = make_pipeline(
-                RandomOverSampler(random_state=42), scaler, classifier
-            )
+            st.image("st_app/Ros_MXS.png")
 
-        # Ajuster et évaluer le pipeline
-        pipeline.fit(X_train, y_train)
-        y_pred = pipeline.predict(X_test)
-        st.write(f"Classification report for {resampling_method}:")
-        st.text(classification_report(y_test, y_pred))
         st.write(
             "Nous voyons que les résultats sont bons avec ces deux méthodes, car leur accurancy est équivalente 0.97 et 0.96."
-            " Maitenant tous dépend de ce que nous recherchons, concernant le recall (Faux Negatif ou positifs)."
+            " Nous souhaitons nous orienter vers la méthode RandomOverSampler pour la suite de notre étude qui nous parait plus simple à comprendre et appéhender pour la suite de notre projet."
             "Nous voyons que la méthode RandomOverSampler est plus performante pour les notes positives, tandis que la méthode FunctionSampler est plus performante pour les notes négatives"
             " les deux méthodes sont donc complémentaires."
         )
