@@ -22,7 +22,7 @@ page = st.sidebar.radio("Aller à la page:", pages)
 
 st.sidebar.subheader(r"""
                      
-                     
+
 **Groupe :** Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui  
 **Promotion :** Mai 24 CDS  
 **Tuteur :** Sébastien Sime  
@@ -326,10 +326,12 @@ elif page == pages[2]:
 ##############################################################################
 elif page == pages[3]:
     st.write("### Analyse des données")
-    st.write("Introduction: ci dessous le dataframe brut apres webscraping")
+    st.write("""Dans cette première exploration des avis clients, nous nous concentrons sur une vue d'ensemble visuelle pour repérer
+            les principales tendances et insights. Cette approche initiale vise à identifier rapidement les éléments clés des retours
+            clients et à guider des analyses plus approfondies.""")
 
     df_global = pd.read_csv("st_app/df_global.csv")
-    st.dataframe(df_global.head())
+    
 
     st.subheader("Nombre d'avis par année")
     fig, ax1 = plt.subplots()
@@ -347,7 +349,7 @@ elif page == pages[3]:
     st.title("Volume des avis par mois")
     st.pyplot(fig1)
     st.write(
-        r"""Commentaire : La répartition mensuelle des avis montre qu'environ 15 000 avis sont déposés en moyenne chaque mois,
+        r"""La répartition mensuelle des avis montre qu'environ 15 000 avis sont déposés en moyenne chaque mois,
              à l'exception du mois d'avril, qui est la meilleure période en termes de nombre d'avis déposés."""
     )
 
@@ -362,8 +364,8 @@ elif page == pages[3]:
     )
     st.pyplot(fig2)
     st.write(
-        r"""Commentaire : La note 5 est de loin la plus courante dans notre jeu de données.
-             Nous examinons s'il existe des différences entre les entreprises en ce qui concerne ces notations."""
+        r"""La note 5 est de loin la plus courante dans notre jeu de données.
+            Nous examinons s'il existe des différences entre les entreprises en ce qui concerne ces notations."""
     )
 
     st.subheader("Distribution des avis par entreprise")
@@ -371,7 +373,7 @@ elif page == pages[3]:
     sns.countplot(y="company", hue="rating", palette="flare", data=df_global, ax=ax4)
     st.pyplot(fig3)
     st.write(
-        r"""Commentaire : En matière de satisfaction, la note de 5 domine largement, bien que des différences
+        r"""En matière de satisfaction, la note de 5 domine largement, bien que des différences
         significatives apparaissent entre entreprises. Par exemple, certaines comme Oney ont une proportion plus
         élevée de notes négatives (1) par rapport à d’autres ayant des volumes d’avis similaires, comme Monabanq.
         Cela soulève des questions sur la corrélation entre les volumes d’avis et la qualité perçue.."""
@@ -382,7 +384,7 @@ elif page == pages[3]:
         "st_app/percent_cum_rates.png", width=1500
     )
     st.write(
-        r"""Commentaire : Ce graphique montre que le pourcentage de notation des entreprises varie en fonction du nombre total d'avis déposés.
+        r"""Ce graphique montre que le pourcentage de notation des entreprises varie en fonction du nombre total d'avis déposés.
              On constate que les scores 1 peuvent être plus ou moins élevés selon les entreprises, ce qui peut sembler être un problème lié aux volumes d'avis.
              Cependant, dans certains cas d'entreprises ayant presque le même volume d'avis, ce n'est pas le cas.
              Par exemple : Oney (5 227 avis) comptabilise 54% de notes 1 et 31% de la note 5 alors que Monabanq (5 535 avis) enregistre seulement 1
@@ -392,7 +394,7 @@ elif page == pages[3]:
     st.write("### Longueur des avis")
     st.image("st_app/len_words.png", width=1500)
     st.write(
-        r"""Commentaire : Nous constatons que la longueur des commentaires des clients satisfaits avec un score de 5 est très courte par rapport à ceux des clients insatisfaits.
+        r"""Nous constatons que la longueur des commentaires des clients satisfaits avec un score de 5 est très courte par rapport à ceux des clients insatisfaits.
              Cela confirme la corrélation négative observée sur la heatmap, et nous pouvons envisager d'utiliser cette variable pour améliorer notre modèle si nécessaire. """
     )
 
@@ -407,7 +409,7 @@ elif page == pages[3]:
             "st_app/wordcloud_neg.png", width=1500
         )
     st.write(
-        r"""Commentaire : Pour les commentaires positifs, nous pouvons identifier quelques thèmes liés à un service clientèle rapide et de qualité, à une bonne expérience et même à des recommandations.
+        r"""Pour les commentaires positifs, nous pouvons identifier quelques thèmes liés à un service clientèle rapide et de qualité, à une bonne expérience et même à des recommandations.
 
 Pour les commentaires négatifs, les thèmes ne sont pas explicites, mais nous pouvons commencer à identifier des problèmes liés au service à la clientèle, etc. ....
 
