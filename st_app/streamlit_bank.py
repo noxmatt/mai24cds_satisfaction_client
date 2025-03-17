@@ -33,7 +33,7 @@ st.sidebar.write("")
 st.sidebar.write("")
 st.sidebar.write("")
 
-# Ajout des noms avec le logo LinkedIn cliquable
+# Ajout des noms avec le logo LinkedIn cliquable(Mettre des balise pour separer les objets)
 
 st.sidebar.markdown(r"""
 **Groupe :**  
@@ -51,8 +51,6 @@ st.sidebar.markdown(r"""
 **Promotion :** Mai 24 CDS  
 **Tuteur :** Sébastien Sime  
 **Date de Soutenance :** 18 Mars 2025""", unsafe_allow_html=True)
-
-
 
 
 ##############################################################################
@@ -656,7 +654,7 @@ de variables indépendantes."""
         accuracy = model.score(X_test, y_test)
         st.write(f"Précision: {accuracy:.2f}")
         st.write(
-            "Nous voyons que les resultats ne sont pas encore satisfaisants, nous allons donc essayer de les améliorer en utilisant la vectorisation des mots et la binarisation des notes"
+            "Nous voyons que les resultats sont meilleurs, mais potentiellement nous souhaitons voir si nous pouvons améliorer le resultat en utilisant la binarisation des notes"
         )
 
     if st.checkbox("#Rééquilibrage des données"):
