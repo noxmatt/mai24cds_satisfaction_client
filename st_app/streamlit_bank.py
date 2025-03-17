@@ -980,7 +980,7 @@ st.write(df['topic'].value_counts())
 
             # le topic modeling pour connaitre les themes les plus importants
             if st.checkbox("J'affiche le code", key="bertopic2"):
-                    st.write("""
+                    code_bert ="""
                     import pandas as pd
                     import numpy as np
                     from bertopic import BERTopic
@@ -1030,7 +1030,8 @@ st.write(df['topic'].value_counts())
                     # Afficher les résultats
 
 
-                    display(topic_model.get_topic(0))  # Afficher les termes pour le sujet 0""")
+                    display(topic_model.get_topic(0))  # Afficher les termes pour le sujet 0"""
+                    st.code(code_bert, language="python")
 
     if st.checkbox("#Cas pratique", key="cas_pratique"):
                         st.write("Cas pratique")
