@@ -35,6 +35,7 @@ st.sidebar.write("")
 
 # Ajout des noms avec le logo LinkedIn cliquable
 
+# Ajouter les informations de groupe avec logos LinkedIn
 st.sidebar.markdown(r"""
 **Groupe :**  
 - <a href="https://www.linkedin.com/in/matthieu-karr-6856a93a/" target="_blank">
@@ -47,7 +48,12 @@ st.sidebar.markdown(r"""
 **Promotion :** Mai 24 CDS  
 **Tuteur :** Sébastien Sime  
 **Date de Soutenance :** 18 Mars 2025  
+
+**GitHub du groupe :**  
+<a href="https://github.com/noxmatt/mai24cds_satisfaction_client.git" target="_blank">
+    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20" style="vertical-align:middle;margin-right:10px;">mai24cds_satisfaction_client</a>
 """, unsafe_allow_html=True)
+
 
 
 ##############################################################################
