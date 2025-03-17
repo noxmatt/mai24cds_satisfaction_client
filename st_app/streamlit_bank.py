@@ -680,6 +680,7 @@ de variables indépendantes."""
 
         L’utilisation combinée de ces techniques améliore la robustesse et la fiabilité des modèles prédictifs tout en optimisant la performance et la précision des systèmes de classification.
         """)
+        st.image("st_app/shema_rus_ros.png", width=1500)
 
 
         import pandas as pd
