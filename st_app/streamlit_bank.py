@@ -20,7 +20,16 @@ pages = [
 
 page = st.sidebar.radio("Aller à la page:", pages)
 
-st.sidebar.write("\n")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
 st.sidebar.write("")
 st.sidebar.write("")
 
