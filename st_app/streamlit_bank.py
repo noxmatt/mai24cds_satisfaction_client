@@ -1034,6 +1034,8 @@ st.write(df['topic'].value_counts())
                     display(topic_model.get_topic(0))  # Afficher les termes pour le sujet 0"""
                     st.code(code_bert, language="python")
             st.image("st_app/bertopics_graph8.png",width=1500)
+            st.write("""Nous avons reussi a obtenir des catégories mais qui malheuresement par manque de temps ne nous apas permis de
+                     les comparer, nous allons donc nous concentrer sur la première méthode.""")
 
     if st.checkbox("#Cas pratique", key="cas_pratique"):
                         st.write("Cas pratique")
