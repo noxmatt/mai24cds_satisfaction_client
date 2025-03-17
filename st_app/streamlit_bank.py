@@ -721,7 +721,7 @@ de variables indépendantes."""
             - Il **conserve la sparsité** des matrices, optimisant ainsi les performances.
             - Il **met à l'échelle proportionnellement** dans l'intervalle [-1, 1], préservant les proportions initiales.
 
-            Passons maintenant au test du MaxAbsScaler et comparons ses performances avec d'autres scalers.
+            Passons maintenant au test du MaxAbsScaler et comparons les performances des deux méthodes de rééquilbrage retenues.
             """)
 
         )
