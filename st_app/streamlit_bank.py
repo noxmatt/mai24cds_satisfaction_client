@@ -768,7 +768,8 @@ de variables indépendantes."""
         
         - **Choix méthodologique** :  
         Nous avons décidé de nous orienter vers la méthode **RandomOverSampler** pour la suite de notre étude. 
-        Cette méthode nous semble plus simple à comprendre et à appréhender pour les prochaines étapes de notre projet.
+        Cette méthode nous semble plus simple à comprendre et à appréhender pour les prochaines étapes de notre projet. Regardons à 
+        présent l'optimisation des hyperparamètres pour améliorer les performances de notre modèle.
 """)
 
 
@@ -856,6 +857,14 @@ de variables indépendantes."""
             st.code(code_hyper, language="python")
 
         st.image("st_app/hyper_param.png")
+
+        # Résultats obtenus via Grid Search CV
+        st.write("Voici les hyperparamètres optimaux calculés :")
+        st.markdown("""
+        - **C** : 2.0 (Régularisation modérée)
+        - **max_iter** : 200 (Itérations maximales pour garantir la convergence)
+        - **solver** : lbfgs (Solveur performant pour les données denses)
+        """)
 
         st.write(
             "A présent pour verifier notre modele pré entrainé avec les hyperparametres,"
