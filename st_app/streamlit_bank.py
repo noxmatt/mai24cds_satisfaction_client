@@ -713,8 +713,7 @@ de variables indépendantes."""
         st.write("Testons àprésent ces deux méthodes pour voir laquelle est la plus perform avec un autre scaler")
                  
     if st.checkbox("#Optimisation du scaler"):
-        st.write(
-            st.markdown(r"""
+        st.markdown(r"""
 
             Après avoir équilibré les données, il est essentiel de normaliser leurs caractéristiques pour éviter tout biais
             lié aux écarts d'échelle. Le **MaxAbsScaler** est particulièrement adapté aux données textuelles vectorisées car :
@@ -723,7 +722,7 @@ de variables indépendantes."""
 
             Passons maintenant au test du MaxAbsScaler et comparons les performances des deux méthodes de rééquilbrage retenus.
             """)
-        )
+        
         import pandas as pd
         import streamlit as st
         from sklearn.metrics import classification_report
