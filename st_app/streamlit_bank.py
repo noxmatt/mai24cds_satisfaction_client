@@ -688,7 +688,7 @@ de variables indépendantes."""
 
         # Sélecteur de méthode de rééchantillonnage
         resampling_method = st.selectbox(
-            "Sélectionnez la méthode de rééchantillonnage",
+            "Sélectionnons à présent la méthode de rééchantillonnage testée",
             [
                 "FunctionSampler",
                 "RandomOverSampler",
@@ -714,7 +714,15 @@ de variables indépendantes."""
                  
     if st.checkbox("#Optimisation du scaler"):
         st.write(
-            """L'optimisation du scaler fait partie des étapes importantes des modèles d'apprentissage automatique."""
+            st.markdown(r"""
+                        
+            Après avoir équilibré les données, il est essentiel de normaliser leurs caractéristiques pour éviter tout biais lié aux écarts d'échelle. Le **MaxAbsScaler** est particulièrement adapté aux données textuelles vectorisées (comme TF-IDF), car :
+            - Il **conserve la sparsité** des matrices, optimisant ainsi les performances.
+            - Il **met à l'échelle proportionnellement** dans l'intervalle [-1, 1], préservant les proportions initiales.
+
+            Passons maintenant au test du MaxAbsScaler et comparons ses performances avec d'autres scalers.
+            """)
+
         )
         import pandas as pd
         import streamlit as st
