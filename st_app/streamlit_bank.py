@@ -17,21 +17,19 @@ pages = [
     "Conclusion"
 ]
 
+page = st.sidebar.radio("Aller à la page:", pages)
+
 st.sidebar.markdown(r"""
 **Groupe :** Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui  
 **Promotion :** Mai 24 CDS  
 **Tuteur :** Sébastien Sime  
 **Date de Soutenance :** 18 Mars 2025  
 
-**LinkedIn du groupe :**  
+**LinkedIn du groupe : ** 
 - [Matthieu Karr](https://www.linkedin.com/in/matthieu-karr-6856a93a/)  
 - [Catherine Otieno](https://www.linkedin.com/in/catherine-otieno-0537b9157/)  
 - [Ikram El Hasnaoui](https://www.linkedin.com/in/ielhasnaoui-photonicsengineer/)
 """)
-
-
-page = st.sidebar.radio("Aller à la page:", pages)
-
 
 
 ##############################################################################
