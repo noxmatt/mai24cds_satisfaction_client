@@ -20,7 +20,7 @@ pages = [
 
 page = st.sidebar.radio("Aller à la page:", pages)
 
-st.sidebar.subheader(r"""
+st.sidebar.markdown(r"""
                      
 
 **Groupe :** Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui  
@@ -328,7 +328,7 @@ elif page == pages[3]:
     st.write("### Analyse des données")
     st.write("""Dans cette première exploration des avis clients, nous nous concentrons sur une vue d'ensemble visuelle pour repérer
             les principales tendances et insights. Cette approche initiale vise à identifier rapidement les éléments clés des retours
-            clients et à guider des analyses plus approfondies.""")
+            clients et nous aider à comprendre nos données.""")
 
     df_global = pd.read_csv("st_app/df_global.csv")
     
