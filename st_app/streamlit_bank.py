@@ -1038,10 +1038,15 @@ st.write(df['topic'].value_counts())
                      les comparer, nous allons donc nous concentrer sur la première méthode.""")
 
     if st.checkbox("#Cas pratique", key="cas_pratique"):
-                        st.write("Ce cas pratique marque la conclusion de notre projet en proposant un outil simple et intuitif pour mieux comprendre la satisfaction client au sein de l’entreprise. "
-    "L’objectif est de transformer les retours clients en informations claires et exploitables afin de répondre efficacement aux attentes et d’améliorer l’expérience client. "
-    "Avec une interface accessible, nous souhaitons offrir une solution qui facilite l’analyse et apporte des réponses concrètes à cette problématique clé."
-)
+                        st.markdown("### Deux sources de données pour une analyse approfondie")
+
+                        st.write(
+                            "Dans le cadre de notre projet, nous avons voulu offrir à l'utilisateur la possibilité de choisir entre deux sources de données : "
+                            "la première est une version pré-traitée, tandis que la seconde a subi des opérations de nettoyage textuel. "
+                            "Cette approche permet de comparer les résultats et d'évaluer si le nettoyage textuel améliore la compréhension des sujets analysés. "
+                            "L'objectif est d'observer l'impact du nettoyage des données sur la qualité et la pertinence des analyses."
+                        )
+
                         from sklearn.feature_extraction.text import CountVectorizer
                         from sklearn.decomposition import LatentDirichletAllocation
                         import pandas as pd
