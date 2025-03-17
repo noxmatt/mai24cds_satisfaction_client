@@ -34,16 +34,20 @@ st.sidebar.write("")
 st.sidebar.write("")
 
 # Ajout des noms avec le logo LinkedIn cliquable
+
 st.sidebar.markdown(r"""
 **Groupe :**  
-- ![LinkedIn](https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png) [Matthieu Karr](https://www.linkedin.com/in/matthieu-karr-6856a93a/)  
-- ![LinkedIn](https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png) [Catherine Otieno](https://www.linkedin.com/in/catherine-otieno-0537b9157/)  
-- ![LinkedIn](https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png) [Ikram El Hasnaoui](https://www.linkedin.com/in/ielhasnaoui-photonicsengineer/)
+- <a href="https://www.linkedin.com/in/matthieu-karr-6856a93a/" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="20" style="vertical-align:middle;margin-right:10px;">Matthieu Karr</a>  
+- <a href="https://www.linkedin.com/in/catherine-otieno-0537b9157/" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="20" style="vertical-align:middle;margin-right:10px;">Catherine Otieno</a>  
+- <a href="https://www.linkedin.com/in/ielhasnaoui-photonicsengineer/" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="20" style="vertical-align:middle;margin-right:10px;">Ikram El Hasnaoui</a>
 
 **Promotion :** Mai 24 CDS  
 **Tuteur :** Sébastien Sime  
 **Date de Soutenance :** 18 Mars 2025  
-""")
+""", unsafe_allow_html=True)
 
 
 ##############################################################################
