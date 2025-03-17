@@ -21,6 +21,8 @@ pages = [
 page = st.sidebar.radio("Aller à la page:", pages)
 
 st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
 
 st.sidebar.markdown("""** **
 
