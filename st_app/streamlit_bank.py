@@ -753,7 +753,7 @@ de variables indépendantes."""
         if resampling_method == "FunctionSampler":
             st.image("st_app/FS_samplerMXS.png")
         elif resampling_method == "RandomOverSampler":
-            st.image("st_app/Ros_MXS.png")
+            st.image("st_app/ros_MXS.png")
 
         st.write(
             "Nous voyons que les résultats sont bons avec ces deux méthodes, car leur accurancy est équivalente 0.97 et 0.96."
