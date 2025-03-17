@@ -658,8 +658,7 @@ de variables indépendantes."""
         )
 
     if st.checkbox("#Rééquilibrage des données"):
-        st.markdown(
-            """Pour équilibrer un dataset, nous utilisons deux approches complémentaires : le suréchantillonnage et le sous-échantillonnage.
+        st.markdown(r"""Pour équilibrer un dataset, nous utilisons deux approches complémentaires : le suréchantillonnage et le sous-échantillonnage.
 
             Suréchantillonnage (**Oversampling**) Cette méthode augmente la représentation des classes minoritaires en générant de nouveaux exemples. Trois techniques couramment utilisées sont :
 
