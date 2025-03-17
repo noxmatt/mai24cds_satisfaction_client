@@ -22,6 +22,19 @@ pages = [
 
 page = st.sidebar.radio("Aller à la page:", pages)
 
+st.write(r"""Groupe : Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui
+                Promation : Mai 24 CDS
+                Tuteur : Sébastien Sime
+                Date de Soutenance : 18 Mars 2025
+                LinkedIn du groupe : 
+             
+                https://www.linkedin.com/in/matthieu-karr-6856a93a/
+             
+                https://www.linkedin.com/in/catherine-otieno-0537b9157/
+             
+                https://www.linkedin.com/in/ielhasnaoui-photonicsengineer/
+                """)
+
 ##############################################################################
 # PAGE 0
 ##############################################################################
@@ -38,18 +51,7 @@ if page == pages[0]:
 
     Ce projet reflète notre engagement à explorer des problématiques concrètes et actuelles à travers le prisme de la data science. En vous plongeant dans cette aventure, vous découvrirez comment les données deviennent une source d’insights stratégiques, ouvrant la voie à des solutions impactantes pour le monde d’aujourd’hui et de demain.
     """)
-    st.write(r"""Groupe : Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui
-                Promation : Mai 24 CDS
-                Tuteur : Sébastien Sime
-                Date de Soutenance : 18 Mars 2025
-                LinkedIn du groupe : 
-             
-                https://www.linkedin.com/in/matthieu-karr-6856a93a/
-             
-                https://www.linkedin.com/in/catherine-otieno-0537b9157/
-             
-                https://www.linkedin.com/in/ielhasnaoui-photonicsengineer/
-                """)
+    
 
 ##############################################################################
 # PAGE 1
@@ -1159,7 +1161,7 @@ st.write(df['topic'].value_counts())
 
 
 ##############################################################################
-# PAGE 6
+# PAGE 5
 ##############################################################################
 elif page == pages[5]:
     st.write("### Conclusion")
