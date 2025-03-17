@@ -1038,7 +1038,10 @@ st.write(df['topic'].value_counts())
                      les comparer, nous allons donc nous concentrer sur la première méthode.""")
 
     if st.checkbox("#Cas pratique", key="cas_pratique"):
-                        st.write("Cas pratique")
+                        st.write("Ce cas pratique marque la conclusion de notre projet en proposant un outil simple et intuitif pour mieux comprendre la satisfaction client au sein de l’entreprise. "
+    "L’objectif est de transformer les retours clients en informations claires et exploitables afin de répondre efficacement aux attentes et d’améliorer l’expérience client. "
+    "Avec une interface accessible, nous souhaitons offrir une solution qui facilite l’analyse et apporte des réponses concrètes à cette problématique clé."
+)
                         from sklearn.feature_extraction.text import CountVectorizer
                         from sklearn.decomposition import LatentDirichletAllocation
                         import pandas as pd
