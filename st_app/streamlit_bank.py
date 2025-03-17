@@ -33,17 +33,16 @@ st.sidebar.write("")
 st.sidebar.write("")
 st.sidebar.write("")
 
-st.sidebar.markdown("""** **
+# Ajout des noms avec le logo LinkedIn cliquable
+st.sidebar.markdown(r"""
+**Groupe :**  
+- ![LinkedIn](https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png) [Matthieu Karr](https://www.linkedin.com/in/matthieu-karr-6856a93a/)  
+- ![LinkedIn](https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png) [Catherine Otieno](https://www.linkedin.com/in/catherine-otieno-0537b9157/)  
+- ![LinkedIn](https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png) [Ikram El Hasnaoui](https://www.linkedin.com/in/ielhasnaoui-photonicsengineer/)
 
-**Groupe :** Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui  
 **Promotion :** Mai 24 CDS  
 **Tuteur :** Sébastien Sime  
 **Date de Soutenance :** 18 Mars 2025  
-
-**LinkedIn du groupe : ** 
-- [Matthieu Karr](https://www.linkedin.com/in/matthieu-karr-6856a93a/)  
-- [Catherine Otieno](https://www.linkedin.com/in/catherine-otieno-0537b9157/)  
-- [Ikram El Hasnaoui](https://www.linkedin.com/in/ielhasnaoui-photonicsengineer/)
 """)
 
 
