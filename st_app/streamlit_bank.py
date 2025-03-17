@@ -9,7 +9,18 @@ import io
 ##############################################################################
 
 
-st.sidebar.title("Sommaire")
+st.sidebar.title("Sommaire" , st.sidebar(r"""Groupe : Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui
+                Promation : Mai 24 CDS
+                Tuteur : Sébastien Sime
+                Date de Soutenance : 18 Mars 2025
+                LinkedIn du groupe : 
+             
+                https://www.linkedin.com/in/matthieu-karr-6856a93a/
+             
+                https://www.linkedin.com/in/catherine-otieno-0537b9157/
+             
+                https://www.linkedin.com/in/ielhasnaoui-photonicsengineer/
+                """))
 
 pages = [
     "Le projet",
@@ -22,18 +33,7 @@ pages = [
 
 page = st.sidebar.radio("Aller à la page:", pages)
 
-st.sidebar(r"""Groupe : Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui
-                Promation : Mai 24 CDS
-                Tuteur : Sébastien Sime
-                Date de Soutenance : 18 Mars 2025
-                LinkedIn du groupe : 
-             
-                https://www.linkedin.com/in/matthieu-karr-6856a93a/
-             
-                https://www.linkedin.com/in/catherine-otieno-0537b9157/
-             
-                https://www.linkedin.com/in/ielhasnaoui-photonicsengineer/
-                """)
+
 
 ##############################################################################
 # PAGE 0
