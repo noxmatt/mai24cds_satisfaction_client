@@ -20,9 +20,8 @@ pages = [
 
 page = st.sidebar.radio("Aller à la page:", pages)
 
-st.sidebar.markdown("""** 
-                    
-                     **
+st.sidebar.markdown("""** **
+                    ** **
 
 **Groupe :** Matthieu Karr - Catherine Otieno Strandberg - Ikram El Hasnaoui  
 **Promotion :** Mai 24 CDS  
