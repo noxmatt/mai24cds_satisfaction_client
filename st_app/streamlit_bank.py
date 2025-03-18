@@ -1015,15 +1015,9 @@ st.write(df['topic'].value_counts())
 
         import joblib
 
-        # Charger les stop words par défaut
-        try:
-            stop_words_default = stopwords.words("french")
-        except:
-            st.warning(
-                "Téléchargez le corpus stopwords pour NLTK si ce n'est pas encore fait :"
-            )
-            st.code("import nltk\nnltk.download('stopwords')")
-            stop_words_default = []
+        stop_words_default = stopwords.words("french")
+        st.code("import nltk\nnltk.download('stopwords')")
+        stop_words_default = []
 
         # Charger et préparer les données
         df_clean = pd.read_csv("st_app/df_clean.csv")
