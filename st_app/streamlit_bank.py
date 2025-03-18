@@ -1154,7 +1154,7 @@ st.write(df['topic'].value_counts())
             )
             st.write(negative_topics)
 
-        if st.checkbox("Visualisation interactive avec LDAvis"):
+        if st.checkbox("Visualisation interactive avec LDAvis", key="ldavis"):
             import pyLDAvis.gensim
             import pyLDAvis
             from gensim.models import LdaModel
@@ -1201,7 +1201,7 @@ st.write(df['topic'].value_counts())
             st.components.v1.html(pyLDAvis_html, height=800, scrolling=True)
             #st.components.v1.html(pyLDAvis_html, width=1300, height=2000, scrolling=True)
     
-        if st.checkbox("Visualisation interactive avec LDAvis"):
+        if st.checkbox("Visualisation interactive avec LDAvis", key="ldavis2"):
             import pyLDAvis.gensim
             import pyLDAvis
             from gensim.models import LdaModel
