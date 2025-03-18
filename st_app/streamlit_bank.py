@@ -54,7 +54,7 @@ st.sidebar.markdown(r"""
 
 
 ##############################################################################
-# PAGE 0
+# PAGE 0  Introduction
 ##############################################################################
 
 if page == pages[0]:
@@ -72,7 +72,7 @@ if page == pages[0]:
     
 
 ##############################################################################
-# PAGE 1
+# PAGE 1 Extraction et Préparation : Le Pouvoir du Webscraping
 ##############################################################################
 elif page == pages[1]:
     st.title("Extraction et Préparation : Le Pouvoir du Webscraping")
@@ -169,7 +169,7 @@ elif page == pages[1]:
     )
 
 ##############################################################################
-# PAGE 2
+# PAGE 2 Exploration & Pré-traitement des données
 ##############################################################################
 
 elif page == pages[2]:
@@ -340,7 +340,7 @@ elif page == pages[2]:
         st.dataframe(df_global.head())
 
 ##############################################################################
-# PAGE 3
+# PAGE 3 Analyse des données
 ##############################################################################
 elif page == pages[3]:
     st.write("### Analyse des données")
@@ -443,27 +443,28 @@ graphique : deux nuages de mots (positif + négatif) """
         pourrait guider des actions ciblées pour renforcer la satisfaction globale.""")
 
 ##############################################################################
-# PAGE 4
+# PAGE 4 Modélisations & Prédictions
 ##############################################################################
 
 elif page == pages[4]:
     st.title("Modélisations & Prédictions")
 
     if st.checkbox("#Première modélisation -Modélisation avec vectorisation des mots"):
-        texte = """Nous avons lancé une première modélisation sans prétraitement des mots afin 
+        st.markdown("""Nous avons lancé une première modélisation sans prétraitement des mots afin 
         d’obtenir une base de comparaison. En respectant les recommandations de scikit-learn et en
         considérant plusieurs critères (taille, type, prédiction attendue, structure et format des données),
         nous avons choisi trois catégories de modèles supervisés :
 
 - Naive Bayes : Utilisation de BernoulliNB et MultinomialNB, qui classifient les avis en supposant l’indépendance
-des caractéristiques.
-
-- KNN : Un système de vote où le label de classe majoritaire est déterminé parmi les « k » voisins les
-plus proches dans l’espace des caractéristiques.
-
-- Logistic Regression : Un modèle statistique visant à estimer la probabilité d’un événement à partir d’un ensemble
-de variables indépendantes."""
-
+des caractéristiques.""")
+        st.image("st_app/naive_bayes.png", width=1500)
+                   
+        st.markdown("""- KNN : Un système de vote où le label de classe majoritaire est déterminé parmi les « k » voisins les
+plus proches dans l’espace des caractéristiques.""")
+        st.image("st_app/knn.png", width=1500)
+        st.markdown("""- Logistic Regression : Un modèle statistique visant à estimer la probabilité d’un événement à partir d’un ensemble
+de variables indépendantes.""")
+        st.image("st_app/logistic_regression.png", width=1500)
         st.header("Modélisation avec vectorisation des mots")
 
         st.markdown(texte)
@@ -569,7 +570,7 @@ de variables indépendantes."""
             [1, 2, 3, 4, 5], [-1, -1, 1, 1, 1]
         )
         st.write(
-            "Tranformationd des notes en deux catégories : -1 pour les notes négatives(1,2) et 1 pour les notes positives(4,5), supression de la note 3"
+            "Tranformation des notes en deux catégories : -1 pour les notes négatives(1,2) et 1 pour les notes positives(4,5), supression de la note 3"
         )
 
         fig4, ax = plt.subplots()
@@ -1206,7 +1207,7 @@ st.write(df['topic'].value_counts())
 
 
 ##############################################################################
-# PAGE 5
+# PAGE 5 Conclusion
 ##############################################################################
 elif page == pages[5]:
     st.write("### Conclusion")
