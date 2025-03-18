@@ -1168,7 +1168,7 @@ st.write(df['topic'].value_counts())
                         from gensim.models import LdaModel
                         from gensim.corpora import Dictionary
 
-                        # Ajouter une sélection pour les avis positifs ou négatifs
+                        # Faire la selection des avis positifs ou négatifs
                         st.write("### Filtrer par type d'avis")
                         sentiment_choice = st.radio(
                             "Choisissez le type d'avis à analyser :", 
