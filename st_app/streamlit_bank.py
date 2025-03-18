@@ -465,11 +465,20 @@ plus proches dans l’espace des caractéristiques.""")
         st.markdown("""- Logistic Regression : Un modèle statistique visant à estimer la probabilité d’un événement à partir d’un ensemble
 de variables indépendantes.""")
         st.image("st_app/shema_lr.png", width=200)
+        import joblib
+        import pandas as pd
+        from sklearn.feature_extraction.text import CountVectorizer
+        from sklearn.pipeline import Pipeline
+        from sklearn.metrics import classification_report
+        import streamlit as st
+
+        # Charger le dataset
+        df_global = pd.read_csv("st_app/df_global.csv")
+
+        # Configuration de l'interface utilisateur
         st.header("Modélisation avec vectorisation des mots")
 
-        df_global = pd.read_csv(
-            "st_app/df_global.csv"
-        )
+        # Sélection de la taille du jeu de données
         data_size = st.slider(
             "Sélectionnez la taille du jeu de données",
             min_value=100,
@@ -479,65 +488,30 @@ de variables indépendantes.""")
             key="slider_data_size1",
         )
         df_global = df_global.sample(n=data_size, random_state=42)
-
         df = df_global[["avis_global", "rating"]]
 
         X = df["avis_global"]
         y = df["rating"]
 
-        # importation des bibliothèques
-        from sklearn.model_selection import train_test_split
-        from sklearn.naive_bayes import BernoulliNB, MultinomialNB
-        from sklearn.linear_model import LogisticRegression
-        from sklearn.neighbors import KNeighborsClassifier
-        from sklearn.feature_extraction.text import CountVectorizer
-        from sklearn.pipeline import Pipeline
-        from sklearn.preprocessing import StandardScaler
-        from sklearn.metrics import classification_report
-
-        # découpage des données
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2, random_state=42
-        )
-
-        # Définir les pipelines pour chaque modèle
-        models = {
-            "Bernoulli Naive Bayes": Pipeline(
-                [
-                    ("vectorizer", CountVectorizer()),
-                    ("scaler", StandardScaler(with_mean=False)),
-                    ("bernoulli", BernoulliNB()),
-                ]
-            ),
-            "Multinomial Naive Bayes": Pipeline(
-                [
-                    ("vectorizer", CountVectorizer()),
-                    ("scaler", StandardScaler(with_mean=False)),
-                    ("multinomial", MultinomialNB()),
-                ]
-            ),
-            "K-Nearest Neighbors": Pipeline(
-                [
-                    ("vectorizer", CountVectorizer()),
-                    ("scaler", StandardScaler(with_mean=False)),
-                    ("knn", KNeighborsClassifier(n_neighbors=3)),
-                ]
-            ),
-            "Logistic Regression": Pipeline(
-                [
-                    ("vectorizer", CountVectorizer()),
-                    ("scaler", StandardScaler(with_mean=False)),
-                    ("lr", LogisticRegression(max_iter=200)),
-                ]
-            ),
+        # Charger les modèles déjà sauvegardés
+        model_paths = {
+            "Bernoulli Naive Bayes": "model_bern_pipe.joblib",
+            "Multinomial Naive Bayes": "model_multi_pipe.joblib",
+            "K-Nearest Neighbors": "model_knn_pipe.joblib",
+            "Logistic Regression": "model_lr_pipe.joblib",
         }
 
-        # Sélection du modèle
-        model_name = st.selectbox("Choisissez un modèle", list(models.keys()), key="1")
-        model = models[model_name]
+        # Liste des modèles pour Streamlit
+        model_name = st.selectbox("Choisissez un modèle", list(model_paths.keys()), key="1")
 
-        # Entraîner le modèle sélectionné
-        model.fit(X_train, y_train)
+        # Charger le modèle sélectionné
+        model = joblib.load(model_paths[model_name])
+
+        # Découpage des données
+        from sklearn.model_selection import train_test_split
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+        # Évaluer le modèle sélectionné
         y_pred = model.predict(X_test)
 
         # Afficher les résultats
@@ -547,6 +521,7 @@ de variables indépendantes.""")
         # Afficher les scores de précision
         accuracy = model.score(X_test, y_test)
         st.write(f"Précision: {accuracy:.2f}")
+
         st.write(
             "Nous voyons que les resultats ne sont pas encore satisfaisants, nous allons donc essayer de les améliorer en utilisant la vectorisation des mots et la binarisation des notes."
         )
