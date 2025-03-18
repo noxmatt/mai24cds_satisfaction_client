@@ -1194,15 +1194,17 @@ st.write(df['topic'].value_counts())
             st.header("### Visualisation interactive avec LDAvis")
             pyLDAvis_html = pyLDAvis.prepared_data_to_html(lda_vis)
             st.markdown(
-                """
-                <style>
-                iframe {
-                    width: 150% !important;
-                    height: 1200px !important;
-                </style>
-                """, unsafe_allow_html=True
-            )
-            st.components.v1.html(pyLDAvis_html, height=1200, scrolling=True)
+        """
+        <style>
+        iframe {
+            width: 200vw !important; /* Prend 200% de la largeur de la fenêtre */
+            height: 1000px !important; /* Augmenter la hauteur si nécessaire */
+            margin: auto; /* Centrer le graphique */
+        }
+        </style>
+        """, unsafe_allow_html=True
+    )
+            st.components.v1.html(pyLDAvis_html, height=1000, scrolling=True)
             #st.components.v1.html(pyLDAvis_html, width=1300, height=2000, scrolling=True)
     
                         
