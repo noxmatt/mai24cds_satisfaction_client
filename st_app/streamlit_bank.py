@@ -607,7 +607,8 @@ de variables indépendantes.""")
         accuracy = model.score(X_test, y_test)
         st.write(f"Précision: {accuracy:.2f}")
         st.write(
-            "Nous voyons que les resultats sont meilleurs, mais potentiellement nous souhaitons voir si nous pouvons améliorer le resultat en utilisant la binarisation des notes"
+            "Nous voyons que les resultats sont meilleurs, mais potentiellement nous souhaitons voir si nous pouvons améliorer"
+            " le resultat en utilisant le rééquilibrage des données."
         )
 
     if st.checkbox("#Rééquilibrage des données"):
@@ -920,6 +921,7 @@ st.write(df['topic'].value_counts())
                 st.code(code_lda, language="python")
 
             st.image("st_app/LDA10thm.png")
+            st.write("""Nous avons obtenu 10 thèmes principaux à partir de l'analyse LDA. Ces thèmes sont définis par les mots les plus fréquents, pour mieux analyser nous allons utiliser un graphique de gensimvis""")
             st.subheader("""Graphique de gensimvis pour les 8 thèmes les plus importants""")
             st.image("st_app/lda_graph8.png")
             st.markdown("""
