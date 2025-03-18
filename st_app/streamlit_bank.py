@@ -1168,7 +1168,7 @@ st.write(df['topic'].value_counts())
 # PAGE 5 Conclusion
 ##############################################################################
 elif page == pages[5]:
-    st.write("### Conclusion")
+    #st.write("### Conclusion")
     #st.write("""
     #Notre projet a permis d’identifier les principaux facteurs influençant la satisfaction client et de comparer
     #différentes approches de modélisation thématique. L’analyse des avis clients offre aux banques en ligne un levier
@@ -1197,7 +1197,7 @@ elif page == pages[5]:
     - **Segmentation des jeux de données** : Entraîner le modèle en fonction de la longueur des mots ou d’autres caractéristiques spécifiques
       pourrait affiner les résultats.
 
-    - **Expérimentation de nouveaux modèles** : Tester des architectures plus avancées pourrait offrir de meilleurs performances.
+    - **Expérimentation de nouveaux modèles** : Tester des architectures plus avancées pourrait offrir de meilleurs performances, en veillant a limiter les ressources.
 
     Outre les aspects techniques, ce projet nous a également permis de grandir sur le plan humain. Travailler en groupe nous a appris la force 
     du collectif, l'importance de la coordination et l’impact des perspectives multiples sur la résolution des problèmes. Nous avons constaté que,
