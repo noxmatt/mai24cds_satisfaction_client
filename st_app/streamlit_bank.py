@@ -467,8 +467,6 @@ de variables indépendantes.""")
         st.image("st_app/shema_lr.png", width=200)
         st.header("Modélisation avec vectorisation des mots")
 
-        st.markdown(texte)
-
         df_global = pd.read_csv(
             "st_app/df_global.csv"
         )
