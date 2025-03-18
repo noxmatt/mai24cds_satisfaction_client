@@ -1197,7 +1197,7 @@ st.write(df['topic'].value_counts())
                 """
                 <style>
                 iframe {
-                    width: 100% !important;
+                    width: 120% !important;
                     height: 1200px !important;
                 </style>
                 """, unsafe_allow_html=True
