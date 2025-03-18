@@ -1134,8 +1134,10 @@ st.write(df['topic'].value_counts())
                         st.write(f"Vous avez choisi le scénario : {selected_scenario} avec n-gram = {ngram_range}")
 
                         # Ajouter des entrées pour paramétrer le nombre de mots et de sujets
-                        col1, col2 = st.columns(2)
                         st.write("### Paramètres des sujets et des mots-clés")
+                        
+                        col1, col2 = st.columns(2)
+                        
                         with col1:                            
                             n_topics = st.number_input(
                             "Nombre de sujets", min_value=1, max_value=5, value=3, step=1, key="num_topics"
