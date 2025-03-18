@@ -558,7 +558,6 @@ de variables indépendantes.""")
         from sklearn.feature_extraction.text import CountVectorizer
         from sklearn.pipeline import Pipeline
         from sklearn.metrics import classification_report
-        import streamlit as st
 
         # Configuration de l'interface utilisateur
         st.header("Modélisation avec vectorisation des mots")
@@ -573,10 +572,11 @@ de variables indépendantes.""")
             key="slider_data_size1",
         )
         df_global = df_global.sample(n=data_size, random_state=42)
-        df = df_global[["avis_global", "rating"]]
+        
+        df = df_global[["avis_global", "rating_2"]]
 
         X = df["avis_global"]
-        y = df["rating"]
+        y = df["rating_2"]
 
         # Charger les modèles déjà sauvegardés
         model_paths = {
