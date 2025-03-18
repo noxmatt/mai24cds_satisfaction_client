@@ -881,7 +881,7 @@ de variables indépendantes.""")
             de données textuelles pour produire un ensemble résumé de termes représentant les principaux sujets de la collection.
             Elle est largement utilisée en traitement du langage naturel (NLP) pour analyser les tendances et les thèmes dans les textes
          """)
-            if st.checkbox("J'affiche le code", key="lda3"):
+            if st.checkbox("Nous affichons le code", key="lda3"):
                 code_lda = """
 from sklearn.decomposition import LatentDirichletAllocation
 from sklearn.feature_extraction.text import CountVectorizer
@@ -939,7 +939,7 @@ st.write(df['topic'].value_counts())
                  tenant compte des relations entre les mots dans leurs contextes.""")
 
             # le topic modeling pour connaitre les themes les plus importants
-            if st.checkbox("J'affiche le code", key="bertopic2"):
+            if st.checkbox("Affichons le code", key="bertopic2"):
                     code_bert ="""
                     import pandas as pd
                     import numpy as np
