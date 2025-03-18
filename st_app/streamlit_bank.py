@@ -1218,7 +1218,7 @@ elif page == pages[5]:
     Nous avons atteint une précision finale de 97% avec la régression logistique et le Random Over Sampler et identifié
     ces cinq clusters principaux via la LDA. Le BERTopic a permis une meilleure détection des thèmes avec des embeddings BERT.
          """)
-    st.write("""Conclusion du Projet
+    st.write(r"""Conclusion du Projet
     Suite à la démonstration de notre cas pratique, nous pouvons affirmer que ce projet a été une expérience extrêmement enrichissante, tant sur le plan technique que collectif. Nous avons exploré de nombreuses méthodes différentes, ce qui nous a permis de mieux comprendre et appliquer les concepts de machine learning. Cependant, il est clair que ce sujet reste vaste et regorge encore de possibilités d'approfondissement.
 
     Voici quelques pistes pour aller plus loin :
