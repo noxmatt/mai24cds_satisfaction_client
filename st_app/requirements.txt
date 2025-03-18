@@ -11,3 +11,4 @@ nltk
 numpy
 bertopic
 transformers
+pyLDAvis
