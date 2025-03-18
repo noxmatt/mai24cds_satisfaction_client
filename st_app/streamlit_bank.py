@@ -1197,7 +1197,7 @@ st.write(df['topic'].value_counts())
         """
         <style>
         iframe {
-            width: 150vw !important; /* Prend 200% de la largeur de la fenêtre */
+            width: 100vw !important; /* Prend 200% de la largeur de la fenêtre */
             height: 1000px !important; /* Augmenter la hauteur si nécessaire */
             margin: auto; /* Centrer le graphique */
         }
