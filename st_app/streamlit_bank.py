@@ -1169,23 +1169,24 @@ st.write(df['topic'].value_counts())
 ##############################################################################
 elif page == pages[5]:
     st.write("### Conclusion")
-    st.write("""
-    Notre projet a permis d’identifier les principaux facteurs influençant la satisfaction client et de comparer
-    différentes approches de modélisation thématique. L’analyse des avis clients offre aux banques en ligne un levier
-    stratégique pour améliorer leurs services et fidéliser leur clientèle.
+    #st.write("""
+    #Notre projet a permis d’identifier les principaux facteurs influençant la satisfaction client et de comparer
+    #différentes approches de modélisation thématique. L’analyse des avis clients offre aux banques en ligne un levier
+    #stratégique pour améliorer leurs services et fidéliser leur clientèle.
             
-    Nous avons atteint une précision finale de 97% avec la régression logistique et le Random Over Sampler et identifié
-    ces cinq clusters principaux via la LDA. Le BERTopic a permis une meilleure détection des thèmes avec des embeddings BERT.
-         """)
+    #Nous avons atteint une précision finale de 97% avec la régression logistique et le Random Over Sampler et identifié
+    #ces cinq clusters principaux via la LDA. Le BERTopic a permis une meilleure détection des thèmes avec des embeddings BERT.
+    #     """)
     st.write("""
     ## Conclusion du Projet
 
     Suite à la démonstration de notre cas pratique, nous pouvons affirmer que ce projet a été une expérience extrêmement enrichissante,
     tant sur le plan technique que collectif. Nous avons exploré de nombreuses méthodes différentes, ce qui nous a permis de mieux
-    comprendre et appliquer les concepts de machine learning. Cependant, il est clair que ce sujet reste vaste et regorge encore de
+    comprendre et appliquer les concepts de machine learning( Atteinte d'une précision finale de 97% avec la régression logistique et le Random Over Sampler et identifié
+    cinq clusters principaux via la LDA.). Cependant, il est clair que ce sujet reste vaste et regorge encore de
     possibilités d'approfondissement.
 
-    Nous piuvons envisager plusieurs pistes d'amélioration pour ce projet :
+    Nous pouvons envisager plusieurs pistes d'amélioration pour ce projet :
 
     - **Utilisation de modèles pré-entraînés** : Les modèles disponibles sur des plateformes comme Hugging Face, tels que BERT ou RoBERTa,
       pourraient offrir une base solide pour améliorer encore les performances de nos analyses.
@@ -1196,7 +1197,7 @@ elif page == pages[5]:
     - **Segmentation des jeux de données** : Entraîner le modèle en fonction de la longueur des mots ou d’autres caractéristiques spécifiques
       pourrait affiner les résultats.
 
-    - **Expérimentation de nouveaux modèles** : Tester des architectures plus avancées pourrait offrir des performances inédites.
+    - **Expérimentation de nouveaux modèles** : Tester des architectures plus avancées pourrait offrir de meilleurs performances.
 
     Outre les aspects techniques, ce projet nous a également permis de grandir sur le plan humain. Travailler en groupe nous a appris la force 
     du collectif, l'importance de la coordination et l’impact des perspectives multiples sur la résolution des problèmes. Nous avons constaté que,
