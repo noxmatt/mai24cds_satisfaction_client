@@ -3,6 +3,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 import io
+import nltk
+from nltk.data import find
+try:
+    find('corpora/stopwords.zip')
+except LookupError:
+    nltk.download("stopwords")
+
 
 ##############################################################################
 # PAGE SOMMAIRE
@@ -1129,6 +1136,7 @@ st.write(df['topic'].value_counts())
             return topics, topic_distributions
 
         # Création des colonnes pour affichage des avis positifs et négatifs
+        @st.cache_resource
         col1, col2 = st.columns(2)
         with col1:
             st.header("### Sujets pour les avis positifs")
@@ -1159,7 +1167,8 @@ st.write(df['topic'].value_counts())
             import pyLDAvis
             from gensim.models import LdaModel
             from gensim.corpora import Dictionary
-
+            
+            
             # Faire la selection des avis positifs ou négatifs
             st.write("### Filtrer par type d'avis")
             sentiment_choice = st.radio(
@@ -1177,6 +1186,7 @@ st.write(df['topic'].value_counts())
             tokenized_reviews = [text.split() for text in reviews]
             dictionary = Dictionary(tokenized_reviews)
             corpus = [dictionary.doc2bow(text) for text in tokenized_reviews]
+            @st.cache_resource
 
             # Entraîner le modèle LDA
             lda_model = LdaModel(corpus=corpus, num_topics=n_topics, id2word=dictionary, passes=10, random_state=42)
