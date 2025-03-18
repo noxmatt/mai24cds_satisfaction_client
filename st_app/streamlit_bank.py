@@ -1122,9 +1122,9 @@ st.write(df['topic'].value_counts())
                         )
 
                         ngram_scenarios = {
-                            "Vision normale (1,1)": (1, 1),
-                            "Bi-gram (2,2)": (2, 2),
-                            "Tri-gram (3,3)": (3, 3),
+                            "Mots Clés individuels": (1, 1),
+                            "Groupe de 2 mots": (2, 2),
+                            "Groupe de 3 Mots": (3, 3),
                         }
                         selected_scenario = st.radio(
                             "Choisissez un scénario n-gram :", options=list(ngram_scenarios.keys())
