@@ -1098,7 +1098,7 @@ st.write(df['topic'].value_counts())
                         
                         with col1:                            
                             n_topics = st.number_input(
-                            "Nombre de sujets", min_value=1, max_value=5, value=3, step=1, key="num_topics"
+                            "Nombre de sujets", min_value=1, max_value=10, value=5, step=1, key="num_topics"
                         )
                         with col2:
                             n_top_words = st.number_input(
