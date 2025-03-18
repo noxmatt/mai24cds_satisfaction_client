@@ -997,205 +997,203 @@ st.write(df['topic'].value_counts())
                      les comparer, nous allons donc nous concentrer sur la première méthode.""")
 
     if st.checkbox("#Cas pratique", key="cas_pratique"):
-                        st.markdown("### Deux sources de données pour une analyse approfondie des sujets")
+        st.markdown("### Deux sources de données pour une analyse approfondie des sujets")
 
-                        st.write(
-                            "Dans le cadre de notre projet, nous avons voulu offrir à l'utilisateur la possibilité de choisir entre deux sources de données : "
-                            "la première est une version pré-traitée uniquement, tandis que la seconde a subi en plus des opérations de nettoyage textuel (Regex,Stopwords). "
-                            "Cette approche permet de comparer les résultats et d'évaluer si le nettoyage textuel améliore la compréhension des sujets analysés. "
-                            "L'objectif est également d'observer l'impact du nettoyage des données sur la qualité et la pertinence des analyses."
-                        )
+        st.write(
+            "Dans le cadre de notre projet, nous avons voulu offrir à l'utilisateur la possibilité de choisir entre deux sources de données : "
+            "la première est une version pré-traitée uniquement, tandis que la seconde a subi en plus des opérations de nettoyage textuel (Regex,Stopwords). "
+            "Cette approche permet de comparer les résultats et d'évaluer si le nettoyage textuel améliore la compréhension des sujets analysés. "
+            "L'objectif est également d'observer l'impact du nettoyage des données sur la qualité et la pertinence des analyses."
+        )
 
-                        from sklearn.feature_extraction.text import CountVectorizer
-                        from sklearn.decomposition import LatentDirichletAllocation
-                        from nltk.corpus import stopwords
-                        import nltk
+        from sklearn.feature_extraction.text import CountVectorizer
+        from sklearn.decomposition import LatentDirichletAllocation
+        from nltk.corpus import stopwords
+        import nltk
 
-                        nltk.download("stopwords")
-                        
-                        import joblib
+        nltk.download("stopwords")
 
-                        # Charger les stop words par défaut
-                        try:
-                            stop_words_default = stopwords.words("french")
-                        except:
-                            st.warning(
-                                "Téléchargez le corpus stopwords pour NLTK si ce n'est pas encore fait :"
-                            )
-                            st.code("import nltk\nnltk.download('stopwords')")
-                            stop_words_default = []
+        import joblib
 
-                        # Charger et préparer les données
-                        df_clean = pd.read_csv("st_app/df_clean.csv")
-                        df_clean = df_clean[df_clean.rating != 3]
-                        df_clean["rating_2"] = df_clean.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
-                        df_clean["avis"] = df_clean["avis_clean"].fillna("").astype(str)
+        # Charger les stop words par défaut
+        try:
+            stop_words_default = stopwords.words("french")
+        except:
+            st.warning(
+                "Téléchargez le corpus stopwords pour NLTK si ce n'est pas encore fait :"
+            )
+            st.code("import nltk\nnltk.download('stopwords')")
+            stop_words_default = []
 
-                        df_global = pd.read_csv("st_app/df_global.csv")
-                        df_global = df_global[df_global.rating != 3]
-                        df_global["rating_2"] = df_global.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
-                        df_global["avis"] = df_global["avis_global"].fillna("").astype(str)
+        # Charger et préparer les données
+        df_clean = pd.read_csv("st_app/df_clean.csv")
+        df_clean = df_clean[df_clean.rating != 3]
+        df_clean["rating_2"] = df_clean.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
+        df_clean["avis"] = df_clean["avis_clean"].fillna("").astype(str)
 
-                        # Ajouter une option pour sélectionner le jeu de données
-                        st.write("### Choix de la source de données")
-                        data_source = st.radio(
-                            "Sélectionnez la source de données :", options=["df_clean", "df_global"]
-                        )
+        df_global = pd.read_csv("st_app/df_global.csv")
+        df_global = df_global[df_global.rating != 3]
+        df_global["rating_2"] = df_global.rating.replace([1, 2, 3, 4, 5], [-1, -1, 1, 1, 1])
+        df_global["avis"] = df_global["avis_global"].fillna("").astype(str)
 
-                        if data_source == "df_clean":
-                            df = df_clean[["avis", "rating_2", "company"]]
-                        else:
-                            df = df_global[["avis", "rating_2", "company"]]
+        # Ajouter une option pour sélectionner le jeu de données
+        st.write("### Choix de la source de données")
+        data_source = st.radio(
+            "Sélectionnez la source de données :", options=["df_clean", "df_global"]
+        )
 
-                        # Filtrage par entreprise
-                        company_name = st.selectbox("Choisissez une entreprise", df["company"].unique())
-                        filtered_df = df[df["company"] == company_name]
+        if data_source == "df_clean":
+            df = df_clean[["avis", "rating_2", "company"]]
+        else:
+            df = df_global[["avis", "rating_2", "company"]]
 
-                        # Filtrage interactif
-                        data_size = st.slider(
-                            "Taille du jeu de données",
-                            min_value=100,
-                            max_value=len(filtered_df),
-                            value=int(len(filtered_df)/3),
-                            step=100,
-                            key="slider_data_size2",
-                        )
-                        filtered_df = filtered_df.sample(n=data_size, random_state=42)
+        # Filtrage par entreprise
+        company_name = st.selectbox("Choisissez une entreprise", df["company"].unique())
+        filtered_df = df[df["company"] == company_name]
 
-                        # Ajouter des scénarios fixes pour les n-grammes
-                        st.markdown("### Trois visions proposées pour l'analyse des données textuelles")
+        # Filtrage interactif
+        data_size = st.slider(
+            "Taille du jeu de données",
+            min_value=100,
+            max_value=len(filtered_df),
+            value=int(len(filtered_df) / 3),
+            step=100,
+            key="slider_data_size2",
+        )
+        filtered_df = filtered_df.sample(n=data_size, random_state=42)
 
-                        st.write(
-                            "Pour enrichir l'analyse, nous proposons trois approches complémentaires :"
-                        )
+        # Ajouter des scénarios fixes pour les n-grammes
+        st.markdown("### Trois visions proposées pour l'analyse des données textuelles")
 
-                        st.markdown(
-                            "- **Thématique simple** : Une analyse basée sur des mots-clés individuels pour identifier les thèmes principaux."
-                            "\n- **Bi-gram** : Analyse des paires de mots consécutifs pour mieux comprendre les relations entre termes."
-                            "\n- **Tri-gram** : Exploration des groupes de trois mots successifs, offrant une vision plus contextuelle et précise des sujets abordés."
-                        )
+        st.write(
+            "Pour enrichir l'analyse, nous proposons trois approches complémentaires :"
+        )
 
-                        st.write(
-                            "Ces trois visions permettent d'explorer les données textuelles sous différents angles afin de maximiser la compréhension et d'extraire des insights plus riches."
-                        )
+        st.markdown(
+            "- **Thématique simple** : Une analyse basée sur des mots-clés individuels pour identifier les thèmes principaux."
+            "\n- **Bi-gram** : Analyse des paires de mots consécutifs pour mieux comprendre les relations entre termes."
+            "\n- **Tri-gram** : Exploration des groupes de trois mots successifs, offrant une vision plus contextuelle et précise des sujets abordés."
+        )
 
-                        ngram_scenarios = {
-                            "Mots Clés individuels": (1, 1),
-                            "Groupe de 2 mots": (2, 2),
-                            "Groupe de 3 Mots": (3, 3),
-                        }
-                        selected_scenario = st.radio(
-                            "Choisissez une vision d'analyse:", options=list(ngram_scenarios.keys())
-                        )
-                        ngram_range = ngram_scenarios[selected_scenario]
+        st.write(
+            "Ces trois visions permettent d'explorer les données textuelles sous différents angles afin de maximiser la compréhension et d'extraire des insights plus riches."
+        )
 
-                        
+        ngram_scenarios = {
+            "Mots Clés individuels": (1, 1),
+            "Groupe de 2 mots": (2, 2),
+            "Groupe de 3 Mots": (3, 3),
+        }
+        selected_scenario = st.radio(
+            "Choisissez une vision d'analyse:", options=list(ngram_scenarios.keys())
+        )
+        ngram_range = ngram_scenarios[selected_scenario]
 
-                        # Ajouter des entrées pour paramétrer le nombre de mots et de sujets
-                        st.write("### Paramètres des sujets et des mots-clés")
-                        
-                        col1, col2 = st.columns(2)
-                        
-                        with col1:                            
-                            n_topics = st.number_input(
-                            "Nombre de sujets", min_value=1, max_value=10, value=5, step=1, key="num_topics"
-                        )
-                        with col2:
-                            n_top_words = st.number_input(
-                            "Nombre de mots-clés par sujet",
-                            min_value=1,
-                            max_value=8,
-                            value=5,
-                            step=1,
-                            key="num_top_words",
-                        )
+        # Ajouter des entrées pour paramétrer le nombre de mots et de sujets
+        st.write("### Paramètres des sujets et des mots-clés")
 
-                        # Ajouter des stop words supplémentaires
-                        stop_words_input = st.text_area(
-                            "Stop words ou mots a enlever de l'analyse (séparez les mots par une virgule)", ""
-                        )
-                        user_stop_words = [
-                            word.strip() for word in stop_words_input.split(",") if word.strip()
-                        ]
-                        all_stop_words = list(stop_words_default + user_stop_words)
+        col1, col2 = st.columns(2)
 
-                        # Fonction pour extraire les sujets avec LDA et calculer la représentativité
-                        def analyze_topics_with_representativity(
-                            reviews, n_topics, n_top_words, stop_words=None, ngram_range=(2, 2)
-                        ):
-                            vectorizer = CountVectorizer(stop_words=stop_words, ngram_range=ngram_range)
-                            X = vectorizer.fit_transform(reviews)
+        with col1:
+            n_topics = st.number_input(
+                "Nombre de sujets", min_value=1, max_value=10, value=5, step=1, key="num_topics"
+            )
+        with col2:
+            n_top_words = st.number_input(
+                "Nombre de mots-clés par sujet",
+                min_value=1,
+                max_value=8,
+                value=5,
+                step=1,
+                key="num_top_words",
+            )
 
-                            lda = LatentDirichletAllocation(n_components=n_topics, random_state=42)
-                            topic_distributions = lda.fit_transform(X)
+        # Ajouter des stop words supplémentaires
+        stop_words_input = st.text_area(
+            "Stop words ou mots a enlever de l'analyse (séparez les mots par une virgule)", ""
+        )
+        user_stop_words = [
+            word.strip() for word in stop_words_input.split(",") if word.strip()
+        ]
+        all_stop_words = list(stop_words_default + user_stop_words)
 
-                            feature_names = vectorizer.get_feature_names_out()
-                            topics = [
-                                [feature_names[i] for i in topic.argsort()[: -n_top_words - 1: -1]]
-                                for topic in lda.components_
-                            ]
-                            return topics, topic_distributions
+        # Fonction pour extraire les sujets avec LDA et calculer la représentativité
+        def analyze_topics_with_representativity(
+            reviews, n_topics, n_top_words, stop_words=None, ngram_range=(2, 2)
+        ):
+            vectorizer = CountVectorizer(stop_words=stop_words, ngram_range=ngram_range)
+            X = vectorizer.fit_transform(reviews)
 
-                        # Création des colonnes pour affichage des avis positifs et négatifs
-                        col1, col2 = st.columns(2)
-                        with col1:
-                            st.header("### Sujets pour les avis positifs")
-                            positive_reviews = filtered_df[filtered_df["rating_2"] == 1]["avis"]
-                            positive_topics, positive_distributions = analyze_topics_with_representativity(
-                                positive_reviews,
-                                n_topics=n_topics,
-                                n_top_words=n_top_words,
-                                stop_words=all_stop_words,
-                                ngram_range=ngram_range,
-                            )
-                            st.write(positive_topics)
+            lda = LatentDirichletAllocation(n_components=n_topics, random_state=42)
+            topic_distributions = lda.fit_transform(X)
 
-                        with col2:
-                            st.header("### Sujets pour les avis négatifs")
-                            negative_reviews = filtered_df[filtered_df["rating_2"] == -1]["avis"]
-                            negative_topics, negative_distributions = analyze_topics_with_representativity(
-                                negative_reviews,
-                                n_topics=n_topics,
-                                n_top_words=n_top_words,
-                                stop_words=all_stop_words,
-                                ngram_range=ngram_range,
-                            )
-                            st.write(negative_topics)
-                            ###################################
-                    if st.checkbox("Visualisation interactive avec LDAvis"):
-                        import pyLDAvis.gensim
-                        import pyLDAvis
-                        from gensim.models import LdaModel
-                        from gensim.corpora import Dictionary
+            feature_names = vectorizer.get_feature_names_out()
+            topics = [
+                [feature_names[i] for i in topic.argsort()[: -n_top_words - 1: -1]]
+                for topic in lda.components_
+            ]
+            return topics, topic_distributions
 
-                        # Faire la selection des avis positifs ou négatifs
-                        st.write("### Filtrer par type d'avis")
-                        sentiment_choice = st.radio(
-                            "Choisissez le type d'avis à analyser :", 
-                            options=["Avis positifs", "Avis négatifs"]
-                        )
+        # Création des colonnes pour affichage des avis positifs et négatifs
+        col1, col2 = st.columns(2)
+        with col1:
+            st.header("### Sujets pour les avis positifs")
+            positive_reviews = filtered_df[filtered_df["rating_2"] == 1]["avis"]
+            positive_topics, positive_distributions = analyze_topics_with_representativity(
+                positive_reviews,
+                n_topics=n_topics,
+                n_top_words=n_top_words,
+                stop_words=all_stop_words,
+                ngram_range=ngram_range,
+            )
+            st.write(positive_topics)
 
-                        # Filtrer les avis en fonction du choix
-                        if sentiment_choice == "Avis positifs":
-                            reviews = filtered_df[filtered_df['rating_2'] == 1]['avis'].tolist()
-                        else:
-                            reviews = filtered_df[filtered_df['rating_2'] == -1]['avis'].tolist()
+        with col2:
+            st.header("### Sujets pour les avis négatifs")
+            negative_reviews = filtered_df[filtered_df["rating_2"] == -1]["avis"]
+            negative_topics, negative_distributions = analyze_topics_with_representativity(
+                negative_reviews,
+                n_topics=n_topics,
+                n_top_words=n_top_words,
+                stop_words=all_stop_words,
+                ngram_range=ngram_range,
+            )
+            st.write(negative_topics)
 
-                        # Préparer les données pour LDA
-                        tokenized_reviews = [text.split() for text in reviews]
-                        dictionary = Dictionary(tokenized_reviews)
-                        corpus = [dictionary.doc2bow(text) for text in tokenized_reviews]
+        if st.checkbox("Visualisation interactive avec LDAvis"):
+            import pyLDAvis.gensim
+            import pyLDAvis
+            from gensim.models import LdaModel
+            from gensim.corpora import Dictionary
 
-                        # Entraîner le modèle LDA
-                        lda_model = LdaModel(corpus=corpus, num_topics=n_topics, id2word=dictionary, passes=10, random_state=42)
+            # Faire la selection des avis positifs ou négatifs
+            st.write("### Filtrer par type d'avis")
+            sentiment_choice = st.radio(
+                "Choisissez le type d'avis à analyser :", 
+                options=["Avis positifs", "Avis négatifs"]
+            )
 
-                        # Générer la visualisation interactive
-                        lda_vis = pyLDAvis.gensim.prepare(lda_model, corpus, dictionary)
+            # Filtrer les avis en fonction du choix
+            if sentiment_choice == "Avis positifs":
+                reviews = filtered_df[filtered_df['rating_2'] == 1]['avis'].tolist()
+            else:
+                reviews = filtered_df[filtered_df['rating_2'] == -1]['avis'].tolist()
 
-                        # Afficher le graphique interactif dans Streamlit
-                        st.header("### Visualisation interactive avec LDAvis")
-                        pyLDAvis_html = pyLDAvis.prepared_data_to_html(lda_vis)
-                        st.components.v1.html(pyLDAvis_html, width=1300, height=400, scrolling=True)
+            # Préparer les données pour LDA
+            tokenized_reviews = [text.split() for text in reviews]
+            dictionary = Dictionary(tokenized_reviews)
+            corpus = [dictionary.doc2bow(text) for text in tokenized_reviews]
+
+            # Entraîner le modèle LDA
+            lda_model = LdaModel(corpus=corpus, num_topics=n_topics, id2word=dictionary, passes=10, random_state=42)
+
+            # Générer la visualisation interactive
+            lda_vis = pyLDAvis.gensim.prepare(lda_model, corpus, dictionary)
+
+            # Afficher le graphique interactif dans Streamlit
+            st.header("### Visualisation interactive avec LDAvis")
+            pyLDAvis_html = pyLDAvis.prepared_data_to_html(lda_vis)
+            st.components.v1.html(pyLDAvis_html, width=1300, height=1000, scrolling=True)
     
                         
 ##############################################################################
