@@ -1105,8 +1105,6 @@ st.write(df['topic'].value_counts())
                         filtered_df = filtered_df.sample(n=data_size, random_state=42)
 
                         # Ajouter des scénarios fixes pour les n-grammes
-                        st.write("### Scénarios des n-grammes")
-                        
                         st.markdown("### Trois visions proposées pour l'analyse des données textuelles")
 
                         st.write(
