@@ -1016,7 +1016,7 @@ st.write(df['topic'].value_counts())
         import joblib
 
         stop_words_default = stopwords.words("french")
-        st.code("import nltk\nnltk.download('stopwords')")
+        
         stop_words_default = []
 
         # Charger et préparer les données
@@ -1154,16 +1154,63 @@ st.write(df['topic'].value_counts())
             )
             st.write(negative_topics)
 
+            if st.checkbox("Visualisation interactive avec LDAvis"):
+                import pyLDAvis.gensim
+                import pyLDAvis
+                from gensim.models import LdaModel
+                from gensim.corpora import Dictionary
+
+                # Faire la selection des avis positifs ou négatifs
+                st.write("### Filtrer par type d'avis")
+                sentiment_choice = st.radio(
+                    "Choisissez le type d'avis à analyser :", 
+                    options=["Avis positifs", "Avis négatifs"]
+                )
+
+                # Filtrer les avis en fonction du choix
+                if sentiment_choice == "Avis positifs":
+                    reviews = filtered_df[filtered_df['rating_2'] == 1]['avis'].tolist()
+                else:
+                    reviews = filtered_df[filtered_df['rating_2'] == -1]['avis'].tolist()
+
+                # Préparer les données pour LDA
+                tokenized_reviews = [text.split() for text in reviews]
+                dictionary = Dictionary(tokenized_reviews)
+                corpus = [dictionary.doc2bow(text) for text in tokenized_reviews]
+
+                # Entraîner le modèle LDA
+                lda_model = LdaModel(corpus=corpus, num_topics=n_topics, id2word=dictionary, passes=10, random_state=42)
+
+                # Générer la visualisation interactive
+                lda_vis = pyLDAvis.gensim.prepare(lda_model, corpus, dictionary)
+
+                # Afficher le graphique interactif dans Streamlit
+                st.header("### Visualisation interactive avec LDAvis")
+                pyLDAvis_html = pyLDAvis.prepared_data_to_html(lda_vis)
+                st.markdown(
+            """
+            <style>
+            iframe {
+                width: 100vw !important; /* Prend 200% de la largeur de la fenêtre */
+                height: 800px !important; /* Augmenter la hauteur si nécessaire */
+                margin: auto; /* Centrer le graphique */
+            }
+            </style>
+            """, unsafe_allow_html=True
+        )
+                st.components.v1.html(pyLDAvis_html, height=800, scrolling=True)
+                #st.components.v1.html(pyLDAvis_html, width=1300, height=2000, scrolling=True)
+        
         if st.checkbox("Visualisation interactive avec LDAvis"):
             import pyLDAvis.gensim
             import pyLDAvis
             from gensim.models import LdaModel
             from gensim.corpora import Dictionary
 
-            # Faire la selection des avis positifs ou négatifs
+            # Faire la sélection des avis positifs ou négatifs
             st.write("### Filtrer par type d'avis")
             sentiment_choice = st.radio(
-                "Choisissez le type d'avis à analyser :", 
+                "Choisissez le type d'avis à analyser :",
                 options=["Avis positifs", "Avis négatifs"]
             )
 
@@ -1173,13 +1220,22 @@ st.write(df['topic'].value_counts())
             else:
                 reviews = filtered_df[filtered_df['rating_2'] == -1]['avis'].tolist()
 
-            # Préparer les données pour LDA
-            tokenized_reviews = [text.split() for text in reviews]
+            # Préparer les données pour LDA en appliquant les stop words personnalisés
+            tokenized_reviews = [
+                [word for word in text.split() if word not in all_stop_words]
+                for text in reviews
+            ]
             dictionary = Dictionary(tokenized_reviews)
             corpus = [dictionary.doc2bow(text) for text in tokenized_reviews]
 
             # Entraîner le modèle LDA
-            lda_model = LdaModel(corpus=corpus, num_topics=n_topics, id2word=dictionary, passes=10, random_state=42)
+            lda_model = LdaModel(
+                corpus=corpus,
+                num_topics=n_topics,
+                id2word=dictionary,
+                passes=10,
+                random_state=42
+            )
 
             # Générer la visualisation interactive
             lda_vis = pyLDAvis.gensim.prepare(lda_model, corpus, dictionary)
@@ -1188,73 +1244,17 @@ st.write(df['topic'].value_counts())
             st.header("### Visualisation interactive avec LDAvis")
             pyLDAvis_html = pyLDAvis.prepared_data_to_html(lda_vis)
             st.markdown(
-        """
-        <style>
-        iframe {
-            width: 100vw !important; /* Prend 200% de la largeur de la fenêtre */
-            height: 800px !important; /* Augmenter la hauteur si nécessaire */
-            margin: auto; /* Centrer le graphique */
-        }
-        </style>
-        """, unsafe_allow_html=True
-    )
+                """
+                <style>
+                iframe {
+                    width: 100vw !important; /* Prend 100% de la largeur de la fenêtre */
+                    height: 800px !important; /* Ajuster la hauteur si nécessaire */
+                    margin: auto; /* Centrer le graphique */
+                }
+                </style>
+                """, unsafe_allow_html=True
+            )
             st.components.v1.html(pyLDAvis_html, height=800, scrolling=True)
-            #st.components.v1.html(pyLDAvis_html, width=1300, height=2000, scrolling=True)
-    
-    if st.checkbox("Visualisation interactive avec LDAvis"):
-        import pyLDAvis.gensim
-        import pyLDAvis
-        from gensim.models import LdaModel
-        from gensim.corpora import Dictionary
-
-        # Faire la sélection des avis positifs ou négatifs
-        st.write("### Filtrer par type d'avis")
-        sentiment_choice = st.radio(
-            "Choisissez le type d'avis à analyser :",
-            options=["Avis positifs", "Avis négatifs"]
-        )
-
-        # Filtrer les avis en fonction du choix
-        if sentiment_choice == "Avis positifs":
-            reviews = filtered_df[filtered_df['rating_2'] == 1]['avis'].tolist()
-        else:
-            reviews = filtered_df[filtered_df['rating_2'] == -1]['avis'].tolist()
-
-        # Préparer les données pour LDA en appliquant les stop words personnalisés
-        tokenized_reviews = [
-            [word for word in text.split() if word not in all_stop_words]
-            for text in reviews
-        ]
-        dictionary = Dictionary(tokenized_reviews)
-        corpus = [dictionary.doc2bow(text) for text in tokenized_reviews]
-
-        # Entraîner le modèle LDA
-        lda_model = LdaModel(
-            corpus=corpus,
-            num_topics=n_topics,
-            id2word=dictionary,
-            passes=10,
-            random_state=42
-        )
-
-        # Générer la visualisation interactive
-        lda_vis = pyLDAvis.gensim.prepare(lda_model, corpus, dictionary)
-
-        # Afficher le graphique interactif dans Streamlit
-        st.header("### Visualisation interactive avec LDAvis")
-        pyLDAvis_html = pyLDAvis.prepared_data_to_html(lda_vis)
-        st.markdown(
-            """
-            <style>
-            iframe {
-                width: 100vw !important; /* Prend 100% de la largeur de la fenêtre */
-                height: 800px !important; /* Ajuster la hauteur si nécessaire */
-                margin: auto; /* Centrer le graphique */
-            }
-            </style>
-            """, unsafe_allow_html=True
-        )
-        st.components.v1.html(pyLDAvis_html, height=800, scrolling=True)
                     
 ##############################################################################
 # PAGE 5 Conclusion
