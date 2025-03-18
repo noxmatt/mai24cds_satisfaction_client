@@ -4,11 +4,6 @@ import seaborn as sns
 import streamlit as st
 import io
 import nltk
-from nltk.data import find
-try:
-    find('corpora/stopwords.zip')
-except LookupError:
-    nltk.download("stopwords")
 
 
 ##############################################################################
