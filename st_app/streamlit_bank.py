@@ -1154,53 +1154,53 @@ st.write(df['topic'].value_counts())
             )
             st.write(negative_topics)
 
-            if st.checkbox("Visualisation interactive avec LDAvis"):
-                import pyLDAvis.gensim
-                import pyLDAvis
-                from gensim.models import LdaModel
-                from gensim.corpora import Dictionary
+        if st.checkbox("Visualisation interactive avec LDAvis"):
+            import pyLDAvis.gensim
+            import pyLDAvis
+            from gensim.models import LdaModel
+            from gensim.corpora import Dictionary
 
-                # Faire la selection des avis positifs ou négatifs
-                st.write("### Filtrer par type d'avis")
-                sentiment_choice = st.radio(
-                    "Choisissez le type d'avis à analyser :", 
-                    options=["Avis positifs", "Avis négatifs"]
-                )
+            # Faire la selection des avis positifs ou négatifs
+            st.write("### Filtrer par type d'avis")
+            sentiment_choice = st.radio(
+                "Choisissez le type d'avis à analyser :", 
+                options=["Avis positifs", "Avis négatifs"]
+            )
 
-                # Filtrer les avis en fonction du choix
-                if sentiment_choice == "Avis positifs":
-                    reviews = filtered_df[filtered_df['rating_2'] == 1]['avis'].tolist()
-                else:
-                    reviews = filtered_df[filtered_df['rating_2'] == -1]['avis'].tolist()
+            # Filtrer les avis en fonction du choix
+            if sentiment_choice == "Avis positifs":
+                reviews = filtered_df[filtered_df['rating_2'] == 1]['avis'].tolist()
+            else:
+                reviews = filtered_df[filtered_df['rating_2'] == -1]['avis'].tolist()
 
-                # Préparer les données pour LDA
-                tokenized_reviews = [text.split() for text in reviews]
-                dictionary = Dictionary(tokenized_reviews)
-                corpus = [dictionary.doc2bow(text) for text in tokenized_reviews]
+            # Préparer les données pour LDA
+            tokenized_reviews = [text.split() for text in reviews]
+            dictionary = Dictionary(tokenized_reviews)
+            corpus = [dictionary.doc2bow(text) for text in tokenized_reviews]
 
-                # Entraîner le modèle LDA
-                lda_model = LdaModel(corpus=corpus, num_topics=n_topics, id2word=dictionary, passes=10, random_state=42)
+            # Entraîner le modèle LDA
+            lda_model = LdaModel(corpus=corpus, num_topics=n_topics, id2word=dictionary, passes=10, random_state=42)
 
-                # Générer la visualisation interactive
-                lda_vis = pyLDAvis.gensim.prepare(lda_model, corpus, dictionary)
+            # Générer la visualisation interactive
+            lda_vis = pyLDAvis.gensim.prepare(lda_model, corpus, dictionary)
 
-                # Afficher le graphique interactif dans Streamlit
-                st.header("### Visualisation interactive avec LDAvis")
-                pyLDAvis_html = pyLDAvis.prepared_data_to_html(lda_vis)
-                st.markdown(
-            """
-            <style>
-            iframe {
-                width: 100vw !important; /* Prend 200% de la largeur de la fenêtre */
-                height: 800px !important; /* Augmenter la hauteur si nécessaire */
-                margin: auto; /* Centrer le graphique */
-            }
-            </style>
-            """, unsafe_allow_html=True
-        )
-                st.components.v1.html(pyLDAvis_html, height=800, scrolling=True)
-                #st.components.v1.html(pyLDAvis_html, width=1300, height=2000, scrolling=True)
-        
+            # Afficher le graphique interactif dans Streamlit
+            st.header("### Visualisation interactive avec LDAvis")
+            pyLDAvis_html = pyLDAvis.prepared_data_to_html(lda_vis)
+            st.markdown(
+        """
+        <style>
+        iframe {
+            width: 100vw !important; /* Prend 200% de la largeur de la fenêtre */
+            height: 800px !important; /* Augmenter la hauteur si nécessaire */
+            margin: auto; /* Centrer le graphique */
+        }
+        </style>
+        """, unsafe_allow_html=True
+    )
+            st.components.v1.html(pyLDAvis_html, height=800, scrolling=True)
+            #st.components.v1.html(pyLDAvis_html, width=1300, height=2000, scrolling=True)
+    
         if st.checkbox("Visualisation interactive avec LDAvis"):
             import pyLDAvis.gensim
             import pyLDAvis
