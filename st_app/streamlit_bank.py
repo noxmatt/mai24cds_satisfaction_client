@@ -922,6 +922,14 @@ st.write(df['topic'].value_counts())
             st.image("st_app/LDA10thm.png")
             st.write("""Graphique de gensimvis pour les 8 thèmes les plus importants""")
             st.image("st_app/lda_graph8.png")
+            st.markdown("""
+            Le graphique **LDA (Latent Dirichlet Allocation) Gensimvis** avec 8 catégories offre une visualisation claire des sujets principaux ainsi que de leurs regroupements thématiques. Cette visualisation est précieuse pour :
+
+            - **Identifier les chevauchements** : Lorsque des sujets présentent des similitudes importantes, cela peut aider à réajuster leurs noms ou à regrouper des catégories proches.
+            - **Réévaluer le nombre de sujets** : Si les groupes sont trop nombreux et se chevauchent, il est possible de diminuer leur quantité. À l'inverse, si les catégories sont trop larges ou imprécises, on peut augmenter le nombre de sujets pour une analyse plus fine.
+
+            Cette approche aide à optimiser la modélisation thématique pour une représentation plus claire et utile des données.""")
+
 
         if st.checkbox("Méthode Bertopics", key="bertopics1"):
             import pandas as pd
