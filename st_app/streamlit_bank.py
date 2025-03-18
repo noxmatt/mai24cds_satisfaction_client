@@ -457,14 +457,14 @@ elif page == pages[4]:
 
 - Naive Bayes : Utilisation de BernoulliNB et MultinomialNB, qui classifient les avis en supposant l’indépendance
 des caractéristiques.""")
-        st.image("st_app/shema_multi_nomial.png", width=1500)
+        st.image("st_app/shema_multi_nomial.png", width=500)
                    
         st.markdown("""- KNN : Un système de vote où le label de classe majoritaire est déterminé parmi les « k » voisins les
 plus proches dans l’espace des caractéristiques.""")
-        st.image("st_app/shema_KNN.png", width=1500)
+        st.image("st_app/shema_KNN.png", width=500)
         st.markdown("""- Logistic Regression : Un modèle statistique visant à estimer la probabilité d’un événement à partir d’un ensemble
 de variables indépendantes.""")
-        st.image("st_app/shema_lr.png", width=1500)
+        st.image("st_app/shema_lr.png", width=500)
         st.header("Modélisation avec vectorisation des mots")
 
         st.markdown(texte)
