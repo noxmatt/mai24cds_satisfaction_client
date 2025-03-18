@@ -1090,7 +1090,7 @@ st.write(df['topic'].value_counts())
                         )
                         ngram_range = ngram_scenarios[selected_scenario]
 
-                        st.write(f"Vous avez choisi le scénario : {selected_scenario} avec n-gram = {ngram_range}")
+                        
 
                         # Ajouter des entrées pour paramétrer le nombre de mots et de sujets
                         st.write("### Paramètres des sujets et des mots-clés")
