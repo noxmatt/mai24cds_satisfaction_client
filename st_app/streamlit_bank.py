@@ -1181,8 +1181,7 @@ st.write(df['topic'].value_counts())
             tokenized_reviews = [text.split() for text in reviews]
             dictionary = Dictionary(tokenized_reviews)
             corpus = [dictionary.doc2bow(text) for text in tokenized_reviews]
-            @st.cache_resource
-
+            
             # Entraîner le modèle LDA
             lda_model = LdaModel(corpus=corpus, num_topics=n_topics, id2word=dictionary, passes=10, random_state=42)
 
