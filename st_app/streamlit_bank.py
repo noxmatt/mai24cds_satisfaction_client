@@ -1104,7 +1104,7 @@ st.write(df['topic'].value_counts())
 
         # Ajouter des stop words supplémentaires
         stop_words_input = st.text_area(
-            "Stop words ou mots a enlever de l'analyse (séparez les mots par une virgule)"; ""
+            "Stop words ou mots a enlever de l'analyse (séparez les mots par un point virgule)", ""
         )
         user_stop_words = [
             word.strip() for word in stop_words_input.split(";") if word.strip()
