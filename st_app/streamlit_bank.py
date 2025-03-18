@@ -1057,7 +1057,7 @@ st.write(df['topic'].value_counts())
                             "Taille du jeu de données",
                             min_value=100,
                             max_value=len(filtered_df),
-                            value=10000,
+                            value=len(filtered_df),
                             step=100,
                             key="slider_data_size2",
                         )
