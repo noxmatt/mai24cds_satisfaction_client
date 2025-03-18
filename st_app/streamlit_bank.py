@@ -1193,7 +1193,18 @@ st.write(df['topic'].value_counts())
             # Afficher le graphique interactif dans Streamlit
             st.header("### Visualisation interactive avec LDAvis")
             pyLDAvis_html = pyLDAvis.prepared_data_to_html(lda_vis)
-            st.components.v1.html(pyLDAvis_html, width=1300, height=1000, scrolling=True)
+            st.markdown(
+                """
+                <style>
+                iframe {
+                    width: 100% !important;
+                    height: 600px !important;
+                }
+                </style>
+                """, unsafe_allow_html=True
+            )
+            st.components.v1.html(pyLDAvis_html, height=600)
+            #st.components.v1.html(pyLDAvis_html, width=1300, height=2000, scrolling=True)
     
                         
 ##############################################################################
