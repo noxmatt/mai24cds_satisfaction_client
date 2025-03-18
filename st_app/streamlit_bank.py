@@ -1218,23 +1218,26 @@ elif page == pages[5]:
     Nous avons atteint une précision finale de 97% avec la régression logistique et le Random Over Sampler et identifié
     ces cinq clusters principaux via la LDA. Le BERTopic a permis une meilleure détection des thèmes avec des embeddings BERT.
          """)
-    st.write("""Conclusion du Projet
+    st.write("""
+    ## Conclusion du Projet
+
     Suite à la démonstration de notre cas pratique, nous pouvons affirmer que ce projet a été une expérience extrêmement enrichissante,
     tant sur le plan technique que collectif. Nous avons exploré de nombreuses méthodes différentes, ce qui nous a permis de mieux
-    comprendre et appliquer les concepts de machine learning. Cependant, il est clair que ce sujet reste vaste et regorge encore de possibilités d'approfondissement.
+    comprendre et appliquer les concepts de machine learning. Cependant, il est clair que ce sujet reste vaste et regorge encore de
+    possibilités d'approfondissement.
 
-    Voici quelques pistes pour aller plus loin :
+    Nous piuvons envisager plusieurs pistes d'amélioration pour ce projet :
 
     - **Utilisation de modèles pré-entraînés** : Les modèles disponibles sur des plateformes comme Hugging Face, tels que BERT ou RoBERTa,
-    pourraient offrir une base solide pour améliorer encore les performances de nos analyses.
+      pourraient offrir une base solide pour améliorer encore les performances de nos analyses.
 
-    - **Augmentation des données**: Intégrer davantage de volumétrie, notamment sur les avis négatifs, permettrait de renforcer l’apprentissage
-    et la généralisation du modèle.
+    - **Augmentation des données** : Intégrer davantage de volumétrie, notamment sur les avis négatifs, permettrait de renforcer l’apprentissage
+      et la généralisation du modèle.
 
-    - **Segmentation des jeux de données **: Entraîner le modèle en fonction de la longueur des mots ou d’autres caractéristiques spécifiques
-    pourrait affiner les résultats.
+    - **Segmentation des jeux de données** : Entraîner le modèle en fonction de la longueur des mots ou d’autres caractéristiques spécifiques
+      pourrait affiner les résultats.
 
-    - **Expérimentation de nouveaux modèles** : Tester des architectures plus avancées, pourrait offrir des performances inédites.
+    - **Expérimentation de nouveaux modèles** : Tester des architectures plus avancées pourrait offrir des performances inédites.
 
     Outre les aspects techniques, ce projet nous a également permis de grandir sur le plan humain. Travailler en groupe nous a appris la force 
     du collectif, l'importance de la coordination et l’impact des perspectives multiples sur la résolution des problèmes. Nous avons constaté que,
@@ -1242,6 +1245,4 @@ elif page == pages[5]:
 
     Enfin, ce travail nous ouvre à de nouvelles applications potentielles. Par exemple, nos résultats pourraient être adaptés à d’autres domaines,
     comme l’analyse des sentiments dans des enquêtes, ou le tri des avis prioritaires pour des entreprises cherchant à améliorer leur satisfaction client.
-
-    En conclusion, ce projet est une belle illustration de la manière dont collaboration, curiosité et persévérance peuvent nous mener à des résultats
-    significatifs, tout en nous invitant à continuer d’avancer.""")
+    """)
