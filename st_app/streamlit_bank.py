@@ -1131,7 +1131,7 @@ st.write(df['topic'].value_counts())
             return topics, topic_distributions
 
         # Création des colonnes pour affichage des avis positifs et négatifs
-        @st.cache_resource
+        
         col1, col2 = st.columns(2)
         with col1:
             st.header("### Sujets pour les avis positifs")
