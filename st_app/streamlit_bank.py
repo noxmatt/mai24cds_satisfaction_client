@@ -1198,13 +1198,13 @@ st.write(df['topic'].value_counts())
         <style>
         iframe {
             width: 100vw !important; /* Prend 200% de la largeur de la fenêtre */
-            height: 1000px !important; /* Augmenter la hauteur si nécessaire */
+            height: 800px !important; /* Augmenter la hauteur si nécessaire */
             margin: auto; /* Centrer le graphique */
         }
         </style>
         """, unsafe_allow_html=True
     )
-            st.components.v1.html(pyLDAvis_html, height=1000, scrolling=True)
+            st.components.v1.html(pyLDAvis_html, height=800, scrolling=True)
             #st.components.v1.html(pyLDAvis_html, width=1300, height=2000, scrolling=True)
     
                         
