@@ -543,7 +543,7 @@ de variables indépendantes.""")
             [1, 2, 3, 4, 5], [-1, -1, 1, 1, 1]
         )
         st.write(
-            "Tranformation des notes en deux catégories : -1 pour les notes négatives(1,2) et 1 pour les notes positives(4,5), supression de la note 3"
+            "Tranformation des notes en deux catégories : -1 pour les notes négatives(1,2) et 1 pour les notes positives(4,5), supression de la note 3 "
         )
 
         fig4, ax = plt.subplots()
@@ -873,8 +873,7 @@ de variables indépendantes.""")
             # le topic modeling pour connaitre les themes les plus importants
             st.subheader("""LDA (Latent Dirichlet Allocation) :""")
             st.image("st_app/shema_lda.png")
-            st.write("""--LDA un modèle probabiliste qui détecte des thèmes latents en analysant les fréquences de mots dans les documents,
-            sans tenir compte du contexte sémantique profond.--            
+            st.write("""       
             L'allocation de Dirichlet latente (LDA) est un modèle génératif probabiliste utilisé pour découvrir des sujets abstraits dans
             une collection de documents. Elle suppose que chaque document est un mélange de plusieurs sujets et que chaque sujet est un
             mélange de mots.
