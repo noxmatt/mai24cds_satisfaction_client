@@ -1162,21 +1162,33 @@ st.write(df['topic'].value_counts())
                                 ngram_range=ngram_range,
                             )
                             st.write(negative_topics)
+                            ###################################
+                            import matplotlib.pyplot as plt
+                            def plot_topics(topics, n_top_words, title):
+                                fig, ax = plt.subplots(figsize=(8, 6))
+                                for i, topic in enumerate(topics):
+                                    words = [f"{word}" for word in topic[:n_top_words]]
+                                    ax.barh(words[::-1], range(1, n_top_words + 1))
+                                ax.set_title(title)
+                                ax.set_xlabel("Importance des mots-clés")
+                                plt.tight_layout()
+                                st.pyplot(fig)
+
+                            # Visualisation des sujets pour les avis positifs
+                            st.header("### Visualisation des sujets positifs")
+                            plot_topics(positive_topics, n_top_words, "Sujets positifs")
+
+                            # Visualisation des sujets pour les avis négatifs
+                            st.header("### Visualisation des sujets négatifs")
+                            plot_topics(negative_topics, n_top_words, "Sujets négatifs")
+
 
 
 ##############################################################################
 # PAGE 5 Conclusion
 ##############################################################################
 elif page == pages[5]:
-    #st.write("### Conclusion")
-    #st.write("""
-    #Notre projet a permis d’identifier les principaux facteurs influençant la satisfaction client et de comparer
-    #différentes approches de modélisation thématique. L’analyse des avis clients offre aux banques en ligne un levier
-    #stratégique pour améliorer leurs services et fidéliser leur clientèle.
-            
-    #Nous avons atteint une précision finale de 97% avec la régression logistique et le Random Over Sampler et identifié
-    #ces cinq clusters principaux via la LDA. Le BERTopic a permis une meilleure détection des thèmes avec des embeddings BERT.
-    #     """)
+
     st.write("""
     ## Conclusion du Projet
 
