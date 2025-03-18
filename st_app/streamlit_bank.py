@@ -553,71 +553,50 @@ de variables indépendantes.""")
         st.header("Distribution des Notes")
         st.pyplot(fig4)
 
+        import joblib
+        import pandas as pd
+        from sklearn.feature_extraction.text import CountVectorizer
+        from sklearn.pipeline import Pipeline
+        from sklearn.metrics import classification_report
+        import streamlit as st
+
+        # Configuration de l'interface utilisateur
+        st.header("Modélisation avec vectorisation des mots")
+
+        # Sélection de la taille du jeu de données
         data_size = st.slider(
             "Sélectionnez la taille du jeu de données",
             min_value=100,
             max_value=len(df_global),
             value=50000,
             step=1000,
-            key="slider_data_size2",
+            key="slider_data_size1",
         )
         df_global = df_global.sample(n=data_size, random_state=42)
-        df = df_global[["avis_global", "rating_2"]]
+        df = df_global[["avis_global", "rating"]]
+
         X = df["avis_global"]
-        y = df["rating_2"]
+        y = df["rating"]
 
-        # importation des bibliothèques
-        from sklearn.model_selection import train_test_split
-        from sklearn.naive_bayes import BernoulliNB, MultinomialNB
-        from sklearn.linear_model import LogisticRegression
-        from sklearn.neighbors import KNeighborsClassifier
-        from sklearn.feature_extraction.text import CountVectorizer
-        from sklearn.pipeline import Pipeline
-        from sklearn.preprocessing import StandardScaler
-        from sklearn.metrics import classification_report
-
-        # découpage des données
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2, random_state=42
-        )
-
-        # Définir les pipelines pour chaque modèle
-        models = {
-            "Bernoulli Naive Bayes": Pipeline(
-                [
-                    ("vectorizer", CountVectorizer()),
-                    ("scaler", StandardScaler(with_mean=False)),
-                    ("bernoulli", BernoulliNB()),
-                ]
-            ),
-            "Multinomial Naive Bayes": Pipeline(
-                [
-                    ("vectorizer", CountVectorizer()),
-                    ("scaler", StandardScaler(with_mean=False)),
-                    ("multinomial", MultinomialNB()),
-                ]
-            ),
-            "K-Nearest Neighbors": Pipeline(
-                [
-                    ("vectorizer", CountVectorizer()),
-                    ("scaler", StandardScaler(with_mean=False)),
-                    ("knn", KNeighborsClassifier(n_neighbors=3)),
-                ]
-            ),
-            "Logistic Regression": Pipeline(
-                [
-                    ("vectorizer", CountVectorizer()),
-                    ("scaler", StandardScaler(with_mean=False)),
-                    ("lr", LogisticRegression(max_iter=200)),
-                ]
-            ),
+        # Charger les modèles déjà sauvegardés
+        model_paths = {
+            "Bernoulli Naive Bayes": "st_app/BernoulliNB_pipeline.pkl",
+            "Multinomial Naive Bayes": "st_app/MultinomialNB_pipeline.pkl",
+            "K-Nearest Neighbors": "st_app/KNN_pipeline.pkl",
+            "Logistic Regression": "st_app/LogisticRegression_pipeline.pkl",
         }
-        # Sélection du modèle
-        model_name = st.selectbox("Choisissez un modèle", list(models.keys()), key="2")
-        model = models[model_name]
 
-        # Entraîner le modèle sélectionné
-        model.fit(X_train, y_train)
+        # Liste des modèles pour Streamlit
+        model_name = st.selectbox("Choisissez un modèle", list(model_paths.keys()), key="model2_bin")
+
+        # Charger le modèle sélectionné
+        model = joblib.load(model_paths[model_name])
+
+        # Découpage des données
+        from sklearn.model_selection import train_test_split
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+        # Évaluer le modèle sélectionné
         y_pred = model.predict(X_test)
 
         # Afficher les résultats
