@@ -765,7 +765,6 @@ de variables indépendantes.""")
 
         Ces deux méthodes sont complémentaires et offrent des avantages distincts selon les types de données analysées.
         
-        - **Choix méthodologique** :  
         Nous avons décidé de nous orienter vers la méthode **RandomOverSampler** pour la suite de notre étude. 
         Cette méthode nous semble plus simple à comprendre et à appréhender pour les prochaines étapes de notre projet. Regardons à 
         présent l'optimisation des hyperparamètres pour améliorer les performances de notre modèle.
