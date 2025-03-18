@@ -580,10 +580,10 @@ de variables indépendantes.""")
 
         # Charger les modèles déjà sauvegardés
         model_paths = {
-            "Bernoulli Naive Bayes": "st_app/BernoulliNB_pipeline.pkl",
-            "Multinomial Naive Bayes": "st_app/MultinomialNB_pipeline.pkl",
-            "K-Nearest Neighbors": "st_app/KNN_pipeline.pkl",
-            "Logistic Regression": "st_app/LogisticRegression_pipeline.pkl",
+            "Bernoulli Naive Bayes": "st_app/BernoulliNB_pipeline",
+            "Multinomial Naive Bayes": "st_app/MultinomialNB_pipeline",
+            "K-Nearest Neighbors": "st_app/KNN_pipeline",
+            "Logistic Regression": "st_app/LogisticRegression_pipeline",
         }
 
         # Liste des modèles pour Streamlit
