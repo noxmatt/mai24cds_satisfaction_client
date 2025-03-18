@@ -1203,7 +1203,7 @@ st.write(df['topic'].value_counts())
                 </style>
                 """, unsafe_allow_html=True
             )
-            st.components.v1.html(pyLDAvis_html, height=600)
+            st.components.v1.html(pyLDAvis_html, height=1200, scrolling=True)
             #st.components.v1.html(pyLDAvis_html, width=1300, height=2000, scrolling=True)
     
                         
