@@ -1163,24 +1163,30 @@ st.write(df['topic'].value_counts())
                             )
                             st.write(negative_topics)
                             ###################################
-                            import matplotlib.pyplot as plt
-                            def plot_topics(topics, n_top_words, title):
-                                fig, ax = plt.subplots(figsize=(8, 6))
-                                for i, topic in enumerate(topics):
-                                    words = [f"{word}" for word in topic[:n_top_words]]
-                                    ax.barh(words[::-1], range(1, n_top_words + 1))
-                                ax.set_title(title)
-                                ax.set_xlabel("Importance des mots-clés")
-                                plt.tight_layout()
-                                st.pyplot(fig)
+                            import pyLDAvis.gensim
+                            import pyLDAvis
+                            from gensim.models import LdaModel
+                            from gensim.corpora import Dictionary
 
-                            # Visualisation des sujets pour les avis positifs
-                            st.header("### Visualisation des sujets positifs")
-                            plot_topics(positive_topics, n_top_words, "Sujets positifs")
+                            # Créer un dictionnaire pour le texte
+                            reviews = filtered_df['avis'].tolist()
+                            tokenized_reviews = [text.split() for text in reviews]
+                            dictionary = Dictionary(tokenized_reviews)
 
-                            # Visualisation des sujets pour les avis négatifs
-                            st.header("### Visualisation des sujets négatifs")
-                            plot_topics(negative_topics, n_top_words, "Sujets négatifs")
+                            # Créer un corpus pour LDA
+                            corpus = [dictionary.doc2bow(text) for text in tokenized_reviews]
+
+                            # Entraîner un modèle LDA avec Gensim
+                            lda_model = LdaModel(corpus=corpus, num_topics=n_topics, id2word=dictionary, passes=10, random_state=42)
+
+                            # Générer la visualisation
+                            lda_vis = pyLDAvis.gensim.prepare(lda_model, corpus, dictionary)
+
+                            # Afficher dans Streamlit
+                            st.header("### Visualisation interactive avec LDAvis")
+                            pyLDAvis_html = pyLDAvis.prepared_data_to_html(lda_vis)
+                            st.components.v1.html(pyLDAvis_html, width=1300, height=800)
+
 
 
 
