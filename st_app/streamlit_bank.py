@@ -1135,9 +1135,9 @@ st.write(df['topic'].value_counts())
 
                         # Ajouter des entrées pour paramétrer le nombre de mots et de sujets
                         col1, col2 = st.columns(2)
-                        with col1:
-                            st.write("### Paramètres des sujets et des mots-clés")
-                        n_topics = st.number_input(
+                        st.write("### Paramètres des sujets et des mots-clés")
+                        with col1:                            
+                            n_topics = st.number_input(
                             "Nombre de sujets", min_value=1, max_value=5, value=3, step=1, key="num_topics"
                         )
                         with col2:
