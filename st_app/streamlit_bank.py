@@ -920,7 +920,7 @@ st.write(df['topic'].value_counts())
                 st.code(code_lda, language="python")
 
             st.image("st_app/LDA10thm.png")
-            st.write("""Graphique de gensimvis pour les 8 thèmes les plus importants""")
+            st.subheader("""Graphique de gensimvis pour les 8 thèmes les plus importants""")
             st.image("st_app/lda_graph8.png")
             st.markdown("""
             Le graphique **LDA (Latent Dirichlet Allocation) Gensimvis** avec 8 catégories offre une visualisation claire des sujets
@@ -933,10 +933,7 @@ st.write(df['topic'].value_counts())
 
 
         if st.checkbox("Méthode Bertopics", key="bertopics1"):
-            import pandas as pd
-            import numpy as np
-            from bertopic import BERTopic
-            from transformers import pipeline
+            
             st.write("""Bertopic, en revanche, combine des embeddings sémantiques (ex. BERT) avec des techniques de regroupement pour extraire des thèmes contextuellement riches,
                  tenant compte des relations entre les mots dans leurs contextes.""")
 
