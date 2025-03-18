@@ -1127,18 +1127,21 @@ st.write(df['topic'].value_counts())
                             "Groupe de 3 Mots": (3, 3),
                         }
                         selected_scenario = st.radio(
-                            "Choisissez un scénario n-gram :", options=list(ngram_scenarios.keys())
+                            "Choisissez une vision d'analyse:", options=list(ngram_scenarios.keys())
                         )
                         ngram_range = ngram_scenarios[selected_scenario]
 
                         st.write(f"Vous avez choisi le scénario : {selected_scenario} avec n-gram = {ngram_range}")
 
                         # Ajouter des entrées pour paramétrer le nombre de mots et de sujets
-                        st.write("### Paramètres des sujets et des mots-clés")
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            st.write("### Paramètres des sujets et des mots-clés")
                         n_topics = st.number_input(
                             "Nombre de sujets", min_value=1, max_value=5, value=3, step=1, key="num_topics"
                         )
-                        n_top_words = st.number_input(
+                        with col2:
+                            n_top_words = st.number_input(
                             "Nombre de mots-clés par sujet",
                             min_value=1,
                             max_value=8,
