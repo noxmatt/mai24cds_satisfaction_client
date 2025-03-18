@@ -1038,13 +1038,13 @@ st.write(df['topic'].value_counts())
                      les comparer, nous allons donc nous concentrer sur la première méthode.""")
 
     if st.checkbox("#Cas pratique", key="cas_pratique"):
-                        st.markdown("### Deux sources de données pour une analyse approfondie")
+                        st.markdown("### Deux sources de données pour une analyse approfondie des sujets")
 
                         st.write(
                             "Dans le cadre de notre projet, nous avons voulu offrir à l'utilisateur la possibilité de choisir entre deux sources de données : "
-                            "la première est une version pré-traitée, tandis que la seconde a subi des opérations de nettoyage textuel. "
+                            "la première est une version pré-traitée uniquement, tandis que la seconde a subi en plus des opérations de nettoyage textuel (Regex,Stopwords). "
                             "Cette approche permet de comparer les résultats et d'évaluer si le nettoyage textuel améliore la compréhension des sujets analysés. "
-                            "L'objectif est d'observer l'impact du nettoyage des données sur la qualité et la pertinence des analyses."
+                            "L'objectif est également d'observer l'impact du nettoyage des données sur la qualité et la pertinence des analyses."
                         )
 
                         from sklearn.feature_extraction.text import CountVectorizer
@@ -1106,6 +1106,23 @@ st.write(df['topic'].value_counts())
 
                         # Ajouter des scénarios fixes pour les n-grammes
                         st.write("### Scénarios des n-grammes")
+                        
+                        st.markdown("### Trois visions proposées pour l'analyse des données textuelles")
+
+                        st.write(
+                            "Pour enrichir l'analyse, nous proposons trois approches complémentaires :"
+                        )
+
+                        st.markdown(
+                            "- **Thématique simple** : Une analyse basée sur des mots-clés individuels pour identifier les thèmes principaux."
+                            "\n- **Bi-gram** : Analyse des paires de mots consécutifs pour mieux comprendre les relations entre termes."
+                            "\n- **Tri-gram** : Exploration des groupes de trois mots successifs, offrant une vision plus contextuelle et précise des sujets abordés."
+                        )
+
+                        st.write(
+                            "Ces trois visions permettent d'explorer les données textuelles sous différents angles afin de maximiser la compréhension et d'extraire des insights plus riches."
+                        )
+
                         ngram_scenarios = {
                             "Vision normale (1,1)": (1, 1),
                             "Bi-gram (2,2)": (2, 2),
